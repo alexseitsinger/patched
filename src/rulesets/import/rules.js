@@ -91,12 +91,14 @@ module.exports = {
    * NOTE: patches in typescript-eslint
    * NOTE: patches as it doesn't work with TypeScript (according to XO)
    *
+   * Disabled because it fucks up
+   *
    * https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/newline-after-import.md
    */
   "import/newline-after-import": [
-    "error",
+    "off",
     {
-      count: 1,
+      count: 2,
     },
   ],
 
@@ -535,18 +537,24 @@ module.exports = {
     "off",
     {
       unusedExports: true,
-      // patches because will throw annoyiung errors in entry points and config
-      // files and there isn't an option to ignore those files here..
+
+      /*
+       * Patches because will throw annoyiung errors in entry points and config
+       * files and there isn't an option to ignore those files here..
+       */
       missingExports: false,
-      //src: [],
-      // ignoreExports: [
-      // "webpack.config.js",
-      // "jest.config.js",
-      // "jest.setup.js",
-      // "jest.assetTransformer.js",
-      // "babel.config.js"
-      // ]
-      //
+
+      /*
+       * Src: [],
+       *  ignoreExports: [
+       *  "webpack.config.js",
+       *  "jest.config.js",
+       *  "jest.setup.js",
+       *  "jest.assetTransformer.js",
+       *  "babel.config.js"
+       *  ]
+       *
+       */
     },
   ],
 }
