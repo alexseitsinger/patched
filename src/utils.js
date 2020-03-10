@@ -1,3 +1,5 @@
+const isArray = require("lodash/isArray")
+const isString = require("lodash/isString")
 const path = require("path")
 const readPkgUp = require("read-pkg-up")
 
@@ -30,28 +32,98 @@ async function usesDependency(dependencyName) {
     .includes(true)
 }
 
-async function determineFeatures() {
+function isReactSource(code) {
+  if (!isString(code)) {
+    return false
+  }
+  const keywords = [' from "react="', "/** @jsx jsx */"]
+  return keywords
+    .map(k => {
+      return code.includes(k)
+    })
+    .includes(true)
+}
+
+function isJestSource(code) {
+  if (!isString(code)) {
+    return false
+  }
+  const keywords = ["describe(", "it(", "test(", "expect("]
+  return keywords
+    .map(k => {
+      return code.includes(k)
+    })
+    .includes(true)
+}
+
+async function determineFeatures(inputFiles) {
+  const isJsFiles = isJavaScriptFiles(inputFiles)
   return {
-    react: await usesDependency("react"),
+    react: (await usesDependency("react")) || isReactSource(inputFiles),
     redux: await usesDependency("redux"),
-    typescript: await usesDependency("typescript"),
+    typescript:
+      !isJsFiles &&
+      ((await usesDependency("typescript")) || isTypeScriptSource(inputFiles)),
     webpack: await usesDependency("webpack"),
-    jest: await usesDependency("jest"),
+    jest: (await usesDependency("jest")) || isJestSource(inputFiles),
+  }
+}
+
+function isJSONSource(code) {
+  try {
+    JSON.parse(code)
+    return true
+  } catch (error) {
+    return false
   }
 }
 
 function isJsonFiles(files) {
-  return files.map(fn => fn.endsWith(".json")).includes(true)
+  if (isString(files)) {
+    return isJSONSource(files)
+  }
+  if (isArray(files)) {
+    return files.map(fn => fn.endsWith(".json")).includes(true)
+  }
+  return false
+}
+
+function isTypeScriptSource(code) {
+  if (!isString(code)) {
+    return false
+  }
+  const keywords = ["type ", "interface "]
+  return keywords
+    .map(k => {
+      return code.includes(k)
+    })
+    .includes(true)
 }
 
 function isPackageJsonFile(fileName) {
-  if (Array.isArray(fileName)) {
+  if (isArray(fileName)) {
     return fileName.map(fn => path.basename(fn) === "package.json").includes(true)
   }
-  if (typeof fileName === "string") {
+  if (isString(fileName)) {
     return path.basename(fileName) === "package.json"
   }
   return false
+}
+
+function isJavaScriptFiles(inputFiles = []) {
+  if (!isArray(inputFiles)) {
+    if (isString(inputFiles)) {
+      if (inputFiles.endsWith(".js") || inputFiles.endsWith(".jsx")) {
+        return true
+      }
+    }
+    return false
+  }
+  return inputFiles
+    .map(fn => {
+      return fn.endsWith(".js") || fn.endsWith(".jsx")
+    })
+    .every(r => r === true)
 }
 
 async function determinePluginGroups(inputFiles) {
@@ -61,7 +133,7 @@ async function determinePluginGroups(inputFiles) {
     }
     return ["json"]
   }
-  const features = await determineFeatures()
+  const features = await determineFeatures(inputFiles)
   let groups = []
   if (features.jest) {
     groups = [...groups, "jest"]
@@ -89,10 +161,12 @@ async function generateConfig(inputFiles) {
   const pluginGroups = await determinePluginGroups(inputFiles)
   const useEslint = shouldUseEslint(pluginGroups)
   const pluginNames = getPlugins(pluginGroups)
-  return createConfig({
+  const config = createConfig({
     pluginNames,
     useEslint,
   })
+  console.log(config)
+  return config
 }
 
 module.exports = {
