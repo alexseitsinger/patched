@@ -7,31 +7,13 @@ const core = [
   "unused-imports",
   "promise",
   "unicorn",
-
-  /*
-   * "babel",
-   * "jsdoc",
-   *  Plugin is broken
-   * "align-assignments",
-   */
   "sort-destructure-keys",
-
-  /*
-   * "sort-class-members",
-   * "return-early-dont-assign",
-   */
   "no-loops",
-
-  /*
-   * "prefer-ternary",
-   * "filenames",
-   */
 ]
 const react = ["react", "react-perf", "react-hooks", "better-styled-components"]
 const redux = ["react-redux", "redux-saga"]
 const typescript = ["@typescript-eslint/eslint-plugin", "jsx-falsy", "tsdoc"]
 const safety = ["security"]
-const support = ["emotion", "prettier"]
 const testing = ["jest", "jest-formatting"]
 const json = ["json"]
 const jsonPackage = ["package-json"]
@@ -43,7 +25,6 @@ const groups = {
   redux,
   typescript,
   safety,
-  support,
   testing,
   json,
   jsonPackage,
