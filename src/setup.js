@@ -168,15 +168,18 @@ function createConfig({ pluginNames, useEslint = true }) {
    * We orgnaize each ruleset and then apply them in order so that overridden
    * rules are correctly used.
    */
+
   let ruleSets = {}
 
   /**
    * If the flag is true, apply the eslint rules and options, first.
    */
+
   if (useEslint) {
     /**
      * Load it into our ruleset for easy patching later.
      */
+
     ruleSets = {
       ...ruleSets,
       eslint: getRuleSet("eslint", isTypeScript),
@@ -185,6 +188,7 @@ function createConfig({ pluginNames, useEslint = true }) {
     /**
      * Load our default config with eslint's stuff.
      */
+
     config = {
       ...config,
       ...ruleSets.eslint.options,
@@ -198,6 +202,7 @@ function createConfig({ pluginNames, useEslint = true }) {
   /**
    * Load the rulesets for each plugin.
    */
+
   plugins.forEach(pluginName => {
     ruleSets = {
       ...ruleSets,
@@ -208,6 +213,7 @@ function createConfig({ pluginNames, useEslint = true }) {
   /**
    * After rulesets are populated, load options and patches for eslint, first.
    */
+
   if (useEslint) {
     config.rules = {
       ...config.rules,
@@ -218,6 +224,7 @@ function createConfig({ pluginNames, useEslint = true }) {
   /**
    * Then load each plugins rules and patches (in order).
    */
+
   sortArray(Object.keys(ruleSets), ruleOrder).forEach(pluginName => {
     const { options, rules } = ruleSets[String(pluginName)]
     config = deepMerge(config, options)
@@ -231,6 +238,7 @@ function createConfig({ pluginNames, useEslint = true }) {
   /**
    * Finally remove duplicate settings.
    */
+
   Object.keys(config.settings).forEach(key => {
     const value = config.settings[String(key)]
     if (Array.isArray(value)) {
