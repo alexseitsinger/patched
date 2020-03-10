@@ -47,10 +47,10 @@ const printReport = report => {
   process.exitCode = report.errorCount === 0 ? 0 : 1
 }
 
-;(async () => {
+/* eslint-disable */
+(async () => {
   if (options.stdin) {
     const stdin = await getStdin()
-    console.log(stdin)
 
     if (options.fix) {
       const result = linter.lintText(stdin, options).results[0]
