@@ -1,5 +1,6 @@
 const path = require("path")
 const { CLIEngine } = require("eslint")
+const { generateConfig } = require("./utils")
 
 const mergeReports = reports => {
   let mergedResults = []
@@ -21,9 +22,7 @@ const mergeReports = reports => {
 
 const processReport = (report, options) => ({
   ...report,
-  results: options.quiet
-    ? CLIEngine.getErrorResults(report.results)
-    : report.results,
+  results: options.quiet ? CLIEngine.getErrorResults(report.results) : report.results,
 })
 
 const runLinter = (filePaths, options) => {
@@ -33,18 +32,52 @@ const runLinter = (filePaths, options) => {
   return processReport(report, options)
 }
 
-const lintFiles = async (filePaths, options) => {
-  const newOptions = {
+const lintText = (string, options) => {
+  const finalOptions = {
     ...options,
     cwd: path.resolve(options.cwd || process.cwd()),
+    baseConfig: generateConfig(string),
     useEslintrc: false,
   }
 
-  const report = runLinter(filePaths, newOptions)
-  return report
+  const linter = new CLIEngine(finalOptions)
+
+  if (options.filename) {
+    const fileName = path.relative(options.cwd, options.filename)
+
+    if (linter.isPathIgnored(options.filename)) {
+      return {
+        errorCount: 0,
+        warningCount: 0,
+        results: [
+          {
+            errorCount: 0,
+            warningCount: 0,
+            messages: [],
+            filePath: fileName,
+          },
+        ],
+      }
+    }
+  }
+
+  const report = linter.executeOnText(string, options.filename)
+  return processReport(report, finalOptions)
+}
+
+const lintFiles = (filePaths, options) => {
+  const finalOptions = {
+    ...options,
+    baseConfig: generateConfig(filePaths),
+    cwd: path.resolve(options.cwd || process.cwd()),
+    useEslintrc: false,
+  }
+  const report = runLinter(filePaths, finalOptions)
+  return processReport(report, finalOptions)
 }
 
 module.exports = {
+  lintText,
   lintFiles,
   getFormatter: CLIEngine.getFormatter,
   getErrorResults: CLIEngine.getErrorResults,
