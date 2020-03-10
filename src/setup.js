@@ -1,7 +1,7 @@
 const deepMerge = require("deepmerge")
 const uniq = require("lodash/uniq")
 const {
-  groups: { core, json, other, react, redux, support, testing, typescript },
+  groups: { core, json, other, react, redux, testing, typescript },
 } = require("./groups")
 
 const ruleOrder = [
@@ -10,7 +10,6 @@ const ruleOrder = [
   ...react,
   ...redux,
   ...testing,
-  ...support,
   ...typescript,
   ...other,
   ...json,
@@ -68,12 +67,9 @@ function getPatches(pluginName, isTypeScript = false) {
 
 function shouldUseLanguage(module_) {
   const keys = Object.keys(module_)
-  const hasKeyCount =
-    keys.length === 1 || keys.length === 2 || keys.length === 3
+  const hasKeyCount = keys.length === 1 || keys.length === 2 || keys.length === 3
   const hasKeyNames =
-    keys.includes("all") ||
-    keys.includes("javascript") ||
-    keys.includes("typescript")
+    keys.includes("all") || keys.includes("javascript") || keys.includes("typescript")
   return hasKeyCount && hasKeyNames
 }
 
