@@ -8,6 +8,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/array-bracket-newline.
    */
+
   "array-bracket-newline": ["error", "consistent"],
 
   /**
@@ -17,6 +18,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/array-bracket-spacing.
    */
+
   "array-bracket-spacing": [
     "error",
     "never",
@@ -34,6 +36,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/array-element-newline.
    */
+
   "array-element-newline": ["error", "consistent"],
 
   /**
@@ -44,6 +47,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/block-spacing.
    */
+
   "block-spacing": ["error", "always"],
 
   /**
@@ -53,6 +57,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/brace-style.
    */
+
   "brace-style": [
     "error",
     "stroustrup",
@@ -72,6 +77,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/camelcase.
    */
+
   camelcase: [
     "off",
     {
@@ -88,6 +94,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/capitalized-comments.
    */
+
   "capitalized-comments": [
     "error",
     "always",
@@ -113,6 +120,7 @@ module.exports = {
    *
    * https://eslint.org/docs/rules/comma-dangle
    */
+
   "comma-dangle": [
     "warn",
     {
@@ -131,6 +139,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/comma-spacing.
    */
+
   "comma-spacing": [
     "warn",
     {
@@ -146,6 +155,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/comma-style.
    */
+
   "comma-style": [
     "warn",
     "last",
@@ -173,13 +183,21 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/computed-property-spacing.
    */
-  "computed-property-spacing": ["error", "never"],
+
+  "computed-property-spacing": [
+    "error",
+    "never",
+    {
+      enforceForClassMembers: true,
+    },
+  ],
 
   /**
    * Enforce consistent naming when capturing the current execution context.
    *
    * Https://eslint.org/docs/rules/consistent-this.
    */
+
   "consistent-this": ["error", "that", "self"],
 
   /**
@@ -189,6 +207,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/eol-last.
    */
+
   "eol-last": ["error", "always"],
 
   /**
@@ -199,6 +218,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/func-call-spacing.
    */
+
   "func-call-spacing": ["error", "never"],
 
   /**
@@ -207,6 +227,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/func-name-matching.
    */
+
   "func-name-matching": [
     "error",
     "always",
@@ -221,6 +242,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/func-names.
    */
+
   "func-names": [
     "error",
     "always",
@@ -235,6 +257,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/func-style.
    */
+
   "func-style": [
     "error",
     "declaration",
@@ -252,6 +275,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/function-paren-newline.
    */
+
   "function-paren-newline": ["error", "consistent"],
 
   /**
@@ -260,6 +284,7 @@ module.exports = {
    * Https://eslint.org/docs/rules/id-blacklist.
    */
   // Add strings in here..
+
   "id-blacklist": ["error"],
 
   /**
@@ -267,6 +292,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/id-length.
    */
+
   "id-length": [
     "error",
     {
@@ -282,6 +308,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/id-match.
    */
+
   "id-match": [
     "error",
     "^.+",
@@ -290,6 +317,7 @@ module.exports = {
       onlyDeclarations: false,
 
       // Might want it true
+
       ignoreDestructuring: false,
     },
   ],
@@ -304,6 +332,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/implicit-arrow-linebreak.
    */
+
   "implicit-arrow-linebreak": "off",
 
   /**
@@ -315,6 +344,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/indent.
    */
+
   indent: [
     "error",
     2,
@@ -355,6 +385,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/jsx-quotes.
    */
+
   "jsx-quotes": ["error", "prefer-double"],
 
   /**
@@ -363,6 +394,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/key-spacing.
    */
+
   "key-spacing": [
     "error",
     {
@@ -374,8 +406,11 @@ module.exports = {
   /**
    * Enforce consistent spacing before and after keywords.
    *
+   * This fucks up prettier, so pathc it there.
+   *
    * Https://eslint.org/docs/rules/keyword-spacing.
    */
+
   "keyword-spacing": [
     "error",
     {
@@ -390,6 +425,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/line-comment-position.
    */
+
   "line-comment-position": ["error", "above"],
 
   /**
@@ -399,6 +435,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/linebreak-style.
    */
+
   "linebreak-style": ["error", "unix"],
 
   /**
@@ -411,6 +448,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/lines-around-comment.
    */
+
   "lines-around-comment": [
     "error",
     {
@@ -438,6 +476,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/lines-between-class-members.
    */
+
   "lines-between-class-members": [
     "error",
     "always",
@@ -454,6 +493,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/max-depth.
    */
+
   "max-depth": [
     "error",
     {
@@ -478,6 +518,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/max-len.
    */
+
   "max-len": [
     "error",
     {
@@ -489,6 +530,7 @@ module.exports = {
        * Setting an ignore pattern according to suggestion on github.
        * https://github.com/prettier/prettier/issues/1954
        */
+
       ignorePattern: "^import\\W.*",
       ignoreTrailingComments: true,
       ignoreUrls: true,
@@ -525,6 +567,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/max-lines.
    */
+
   "max-lines": [
     "error",
     {
@@ -543,6 +586,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/max-lines-per-function.
    */
+
   "max-lines-per-function": [
     "error",
     {
@@ -562,6 +606,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/max-nested-callbacks.
    */
+
   "max-nested-callbacks": [
     "error",
     {
@@ -578,6 +623,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/max-params.
    */
+
   "max-params": [
     "error",
     {
@@ -594,6 +640,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/max-statements.
    */
+
   "max-statements": [
     "error",
     {
@@ -610,6 +657,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/max-statements-per-line.
    */
+
   "max-statements-per-line": [
     "error",
     {
@@ -624,6 +672,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/multiline-comment-style.
    */
+
   "multiline-comment-style": ["error", "starred-block"],
 
   /**
@@ -631,6 +680,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/multiline-ternary.
    */
+
   "multiline-ternary": ["error", "always-multiline"],
 
   /**
@@ -638,6 +688,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/new-cap.
    */
+
   "new-cap": [
     "error",
     {
@@ -659,6 +710,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/new-parens.
    */
+
   "new-parens": "error",
 
   /**
@@ -666,6 +718,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/newline-per-chained-call.
    */
+
   "newline-per-chained-call": [
     "error",
     {
@@ -678,6 +731,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-array-constructor.
    */
+
   "no-array-constructor": "error",
 
   /**
@@ -685,6 +739,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-bitwise.
    */
+
   "no-bitwise": [
     "error",
     {
@@ -700,6 +755,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-continue.
    */
+
   "no-continue": "off",
 
   /**
@@ -709,6 +765,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-inline-comments.
    */
+
   "no-inline-comments": "error",
 
   /**
@@ -718,6 +775,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-lonely-if.
    */
+
   "no-lonely-if": "error",
 
   /**
@@ -728,10 +786,12 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-mixed-operators.
    */
+
   "no-mixed-operators": [
     "error",
     {
       // Arithmetic groups disallowed from mixing with other groups.
+
       groups: [
         ["%", "**"],
         ["%", "+"],
@@ -755,6 +815,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-mixed-spaces-and-tabs.
    */
+
   "no-mixed-spaces-and-tabs": "error",
 
   /**
@@ -762,6 +823,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-multi-assign.
    */
+
   "no-multi-assign": "error",
 
   /**
@@ -771,6 +833,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-multiple-empty-lines.
    */
+
   "no-multiple-empty-lines": [
     "error",
     {
@@ -789,6 +852,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-negated-condition.
    */
+
   "no-negated-condition": "off",
 
   /**
@@ -796,6 +860,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-nested-ternary.
    */
+
   "no-nested-ternary": "error",
 
   /**
@@ -803,6 +868,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-new-object.
    */
+
   "no-new-object": "error",
 
   /**
@@ -810,6 +876,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-plusplus.
    */
+
   "no-plusplus": [
     "error",
     {
@@ -825,6 +892,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-restricted-syntax.
    */
+
   "no-restricted-syntax": [
     "error",
     {
@@ -857,6 +925,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-tabs.
    */
+
   "no-tabs": [
     "error",
     {
@@ -869,6 +938,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-ternary.
    */
+
   "no-ternary": "off",
 
   /**
@@ -878,6 +948,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-trailing-spaces.
    */
+
   "no-trailing-spaces": [
     "error",
     {
@@ -891,6 +962,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-underscore-dangle.
    */
+
   "no-underscore-dangle": [
     "off",
     {
@@ -908,6 +980,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-unneeded-ternary.
    */
+
   "no-unneeded-ternary": [
     "error",
     {
@@ -922,6 +995,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-whitespace-before-property.
    */
+
   "no-whitespace-before-property": "error",
 
   /**
@@ -931,6 +1005,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/nonblock-statement-body-position.
    */
+
   "nonblock-statement-body-position": [
     "error",
     "below",
@@ -946,6 +1021,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/object-curly-newline.
    */
+
   "object-curly-newline": [
     "error",
     {
@@ -975,6 +1051,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/object-curly-spacing.
    */
+
   "object-curly-spacing": [
     "error",
     "always",
@@ -991,6 +1068,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/object-property-newline.
    */
+
   "object-property-newline": [
     "error",
     {
@@ -1006,6 +1084,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/one-var.
    */
+
   "one-var": ["error", "never"],
 
   /**
@@ -1015,6 +1094,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/one-var-declaration-per-line.
    */
+
   "one-var-declaration-per-line": ["error", "always"],
 
   /**
@@ -1024,6 +1104,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/operator-assignment.
    */
+
   "operator-assignment": ["error", "always"],
 
   /**
@@ -1035,6 +1116,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/operator-linebreak.
    */
+
   "operator-linebreak": [
     "error",
     "after",
@@ -1053,6 +1135,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/padded-blocks.
    */
+
   "padded-blocks": [
     "error",
     "never",
@@ -1069,6 +1152,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/padding-line-between-statements.
    */
+
   "padding-line-between-statements": [
     "error",
     {
@@ -1086,6 +1170,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/prefer-object-spread.
    */
+
   "prefer-object-spread": "error",
 
   /**
@@ -1093,6 +1178,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/quote-props.
    */
+
   "quote-props": [
     "error",
     "as-needed",
@@ -1111,6 +1197,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/quotes.
    */
+
   quotes: [
     "error",
     "double",
@@ -1129,6 +1216,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/semi.
    */
+
   semi: [
     "error",
     "never",
@@ -1144,6 +1232,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/semi-spacing.
    */
+
   "semi-spacing": [
     "error",
     {
@@ -1161,6 +1250,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/semi-style.
    */
+
   "semi-style": ["error", "first"],
 
   /**
@@ -1168,6 +1258,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/sort-keys.
    */
+
   "sort-keys": [
     "off",
     "asc",
@@ -1183,6 +1274,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/sort-vars.
    */
+
   "sort-vars": [
     "off",
     {
@@ -1197,6 +1289,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/space-before-blocks.
    */
+
   "space-before-blocks": [
     "error",
     {
@@ -1214,6 +1307,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/space-before-function-paren.
    */
+
   "space-before-function-paren": [
     "error",
     {
@@ -1230,6 +1324,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/space-in-parens.
    */
+
   "space-in-parens": ["error", "never"],
 
   /**
@@ -1239,6 +1334,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/space-infix-ops.
    */
+
   "space-infix-ops": [
     "error",
     {
@@ -1253,6 +1349,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/space-unary-ops.
    */
+
   "space-unary-ops": [
     "error",
     {
@@ -1271,6 +1368,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/spaced-comment.
    */
+
   "spaced-comment": [
     "error",
     "always",
@@ -1287,6 +1385,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/switch-colon-spacing.
    */
+
   "switch-colon-spacing": [
     "error",
     {
@@ -1302,6 +1401,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/template-tag-spacing.
    */
+
   "template-tag-spacing": ["error", "never"],
 
   /**
@@ -1311,6 +1411,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/unicode-bom.
    */
+
   "unicode-bom": ["error", "never"],
 
   /**
@@ -1320,6 +1421,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/wrap-regex.
    */
+
   "wrap-regex": "off",
 
   /**
@@ -1332,6 +1434,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/strict.
    */
+
   strict: ["error", "never"],
 
   /**
@@ -1343,6 +1446,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/callback-return.
    */
+
   "callback-return": [
     "off",
     ["callback", "cb", "errback", "eb", "next", "fn", "func", "f"],
@@ -1357,6 +1461,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/global-require.
    */
+
   "global-require": "off",
 
   /**
@@ -1364,6 +1469,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/handle-callback-err.
    */
+
   "handle-callback-err": ["error", "err"],
 
   /**
@@ -1371,6 +1477,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-buffer-constructor.
    */
+
   "no-buffer-constructor": "error",
 
   /**
@@ -1378,6 +1485,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-mixed-requires.
    */
+
   "no-mixed-requires": [
     "error",
     {
@@ -1391,6 +1499,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-new-require.
    */
+
   "no-new-require": "error",
 
   /**
@@ -1398,6 +1507,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-path-concat.
    */
+
   "no-path-concat": "error",
 
   /**
@@ -1409,6 +1519,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-process-env.
    */
+
   "no-process-env": "off",
 
   /**
@@ -1416,6 +1527,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-process-exit.
    */
+
   "no-process-exit": "error",
 
   /**
@@ -1427,6 +1539,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-restricted-modules.
    */
+
   "no-restricted-modules": [
     "off",
     {
@@ -1444,6 +1557,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-sync.
    */
+
   "no-sync": [
     "off",
     {
@@ -1456,6 +1570,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/for-direction.
    */
+
   "for-direction": "error",
 
   /**
@@ -1463,6 +1578,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/getter-return.
    */
+
   "getter-return": [
     "error",
     {
@@ -1475,6 +1591,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-async-promise-executor.
    */
+
   "no-async-promise-executor": "error",
 
   /**
@@ -1482,6 +1599,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-await-in-loop.
    */
+
   "no-await-in-loop": "error",
 
   /**
@@ -1489,6 +1607,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-compare-neg-zero.
    */
+
   "no-compare-neg-zero": "error",
 
   /**
@@ -1496,6 +1615,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-cond-assign.
    */
+
   "no-cond-assign": "error",
 
   /**
@@ -1506,6 +1626,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-console.
    */
+
   "no-console": "off",
 
   /**
@@ -1513,6 +1634,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-constant-condition.
    */
+
   "no-constant-condition": [
     "error",
     {
@@ -1525,6 +1647,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-control-regex.
    */
+
   "no-control-regex": "error",
 
   /**
@@ -1532,6 +1655,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-debugger.
    */
+
   "no-debugger": "error",
 
   /**
@@ -1539,6 +1663,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-dupe-args.
    */
+
   "no-dupe-args": "error",
 
   /**
@@ -1546,6 +1671,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-dupe-keys.
    */
+
   "no-dupe-keys": "error",
 
   /**
@@ -1553,6 +1679,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-duplicate-case.
    */
+
   "no-duplicate-case": "error",
 
   /**
@@ -1560,6 +1687,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-empty.
    */
+
   "no-empty": [
     "error",
     {
@@ -1572,6 +1700,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-empty-character-class.
    */
+
   "no-empty-character-class": "error",
 
   /**
@@ -1579,6 +1708,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-ex-assign.
    */
+
   "no-ex-assign": "error",
 
   /**
@@ -1588,6 +1718,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-extra-boolean-cast.
    */
+
   "no-extra-boolean-cast": "error",
 
   /**
@@ -1601,6 +1732,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-extra-parens.
    */
+
   "no-extra-parens": [
     "off",
     "all",
@@ -1620,6 +1752,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-extra-semi.
    */
+
   "no-extra-semi": "error",
 
   /**
@@ -1627,6 +1760,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-func-assign.
    */
+
   "no-func-assign": "error",
 
   /**
@@ -1634,6 +1768,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-inner-declarations.
    */
+
   "no-inner-declarations": ["error", "functions"],
 
   /**
@@ -1641,6 +1776,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-invalid-regexp.
    */
+
   "no-invalid-regexp": [
     "error",
     {
@@ -1653,6 +1789,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-irregular-whitespace.
    */
+
   "no-irregular-whitespace": [
     "error",
     {
@@ -1668,6 +1805,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-misleading-character-class.
    */
+
   "no-misleading-character-class": "error",
 
   /**
@@ -1675,6 +1813,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-obj-calls.
    */
+
   "no-obj-calls": "error",
 
   /**
@@ -1682,6 +1821,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-prototype-builtins.
    */
+
   "no-prototype-builtins": "error",
 
   /**
@@ -1691,6 +1831,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-regex-spaces.
    */
+
   "no-regex-spaces": "error",
 
   /**
@@ -1698,6 +1839,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-sparse-arrays.
    */
+
   "no-sparse-arrays": "error",
 
   /**
@@ -1705,6 +1847,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-template-curly-in-string.
    */
+
   "no-template-curly-in-string": "error",
 
   /**
@@ -1712,6 +1855,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-unexpected-multiline.
    */
+
   "no-unexpected-multiline": "error",
 
   /**
@@ -1719,6 +1863,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-unreachable.
    */
+
   "no-unreachable": "error",
 
   /**
@@ -1726,6 +1871,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-unsafe-finally.
    */
+
   "no-unsafe-finally": "error",
 
   /**
@@ -1735,6 +1881,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-unsafe-negation.
    */
+
   "no-unsafe-negation": "error",
 
   /**
@@ -1742,6 +1889,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/require-atomic-updates.
    */
+
   "require-atomic-updates": "error",
 
   /**
@@ -1749,6 +1897,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/use-isnan.
    */
+
   "use-isnan": "error",
 
   /**
@@ -1756,6 +1905,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/valid-typeof.
    */
+
   "valid-typeof": [
     "error",
     {
@@ -1768,6 +1918,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/accessor-pairs.
    */
+
   "accessor-pairs": [
     "off",
     {
@@ -1781,6 +1932,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/array-callback-return.
    */
+
   "array-callback-return": [
     "error",
     {
@@ -1793,6 +1945,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/block-scoped-var.
    */
+
   "block-scoped-var": "error",
 
   /**
@@ -1802,6 +1955,7 @@ module.exports = {
    *
    * Very annoying rule.
    */
+
   "class-methods-use-this": [
     "off",
     {
@@ -1814,6 +1968,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/complexity.
    */
+
   complexity: [
     "error",
     {
@@ -1831,6 +1986,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/consistent-return.
    */
+
   "consistent-return": [
     "off",
     {
@@ -1845,6 +2001,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/curly.
    */
+
   curly: ["error", "all"],
 
   /**
@@ -1855,6 +2012,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/default-case.
    */
+
   "default-case": [
     "off",
     {
@@ -1869,6 +2027,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/dot-location.
    */
+
   "dot-location": ["error", "property"],
 
   /**
@@ -1878,6 +2037,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/dot-notation.
    */
+
   "dot-notation": [
     "error",
     {
@@ -1891,6 +2051,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/eqeqeq.
    */
+
   eqeqeq: ["error", "always"],
 
   /**
@@ -1898,6 +2059,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/guard-for-in.
    */
+
   "guard-for-in": "error",
 
   /**
@@ -1905,6 +2067,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/max-classes-per-file.
    */
+
   "max-classes-per-file": ["error", 5],
 
   /**
@@ -1912,6 +2075,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-alert.
    */
+
   "no-alert": "error",
 
   /**
@@ -1919,6 +2083,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-caller.
    */
+
   "no-caller": "error",
 
   /**
@@ -1926,6 +2091,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-case-declarations.
    */
+
   "no-case-declarations": "error",
 
   /**
@@ -1936,6 +2102,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-div-regex.
    */
+
   "no-div-regex": "error",
 
   /**
@@ -1945,6 +2112,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-else-return.
    */
+
   "no-else-return": [
     "error",
     {
@@ -1961,6 +2129,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-empty-function.
    */
+
   "no-empty-function": [
     "error",
     {
@@ -1969,6 +2138,7 @@ module.exports = {
         "arrowFunctions",
 
         // "generatorFunctions",
+
         "methods",
 
         /*
@@ -1988,6 +2158,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-empty-pattern.
    */
+
   "no-empty-pattern": "error",
 
   /**
@@ -1995,6 +2166,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-eq-null.
    */
+
   "no-eq-null": "error",
 
   /**
@@ -2002,6 +2174,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-eval.
    */
+
   "no-eval": [
     "error",
     {
@@ -2014,6 +2187,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-extend-native.
    */
+
   "no-extend-native": [
     "error",
     {
@@ -2028,6 +2202,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-extra-bind.
    */
+
   "no-extra-bind": "error",
 
   /**
@@ -2035,6 +2210,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-extra-label.
    */
+
   "no-extra-label": "error",
 
   /**
@@ -2042,6 +2218,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-fallthrough.
    */
+
   "no-fallthrough": [
     "error",
     {
@@ -2056,6 +2233,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-floating-decimal.
    */
+
   "no-floating-decimal": "error",
 
   /**
@@ -2063,6 +2241,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-global-assign.
    */
+
   "no-global-assign": [
     "error",
     {
@@ -2077,6 +2256,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-implicit-coercion.
    */
+
   "no-implicit-coercion": [
     "error",
     {
@@ -2099,6 +2279,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-implicit-globals.
    */
+
   "no-implicit-globals": "error",
 
   /**
@@ -2106,6 +2287,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-implied-eval.
    */
+
   "no-implied-eval": "error",
 
   /**
@@ -2117,6 +2299,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-invalid-this.
    */
+
   "no-invalid-this": "off",
 
   /**
@@ -2124,6 +2307,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-iterator.
    */
+
   "no-iterator": "error",
 
   /**
@@ -2131,6 +2315,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-labels.
    */
+
   "no-labels": [
     "error",
     {
@@ -2144,6 +2329,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-lone-blocks.
    */
+
   "no-lone-blocks": "error",
 
   /**
@@ -2152,6 +2338,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-loop-func.
    */
+
   "no-loop-func": "error",
 
   /**
@@ -2163,6 +2350,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-magic-numbers.
    */
+
   "no-magic-numbers": [
     "off",
     {
@@ -2180,12 +2368,14 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-multi-spaces.
    */
+
   "no-multi-spaces": [
     "error",
     {
       ignoreEOLComments: false,
       exceptions: {
         // Default is True
+
         Property: false,
       },
     },
@@ -2196,6 +2386,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-multi-str.
    */
+
   "no-multi-str": "error",
 
   /**
@@ -2206,6 +2397,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-new.
    */
+
   "no-new": "off",
 
   /**
@@ -2213,6 +2405,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-new-func.
    */
+
   "no-new-func": "error",
 
   /**
@@ -2220,6 +2413,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-new-wrappers.
    */
+
   "no-new-wrappers": "error",
 
   /**
@@ -2227,6 +2421,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-octal.
    */
+
   "no-octal": "error",
 
   /**
@@ -2234,6 +2429,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-octal-escape.
    */
+
   "no-octal-escape": "error",
 
   /**
@@ -2241,28 +2437,34 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-param-reassign.
    */
+
   "no-param-reassign": [
     "error",
     {
       props: true,
       ignorePropertyModificationsFor: [
         // For reduce accumulators
+
         "acc",
         "accumulator",
 
         // For events
+
         "e",
         "event",
 
         // For Express requests
+
         "req",
         "request",
 
         // For Express responses
+
         "res",
         "response",
 
         // For ReactRouter context
+
         "staticContext",
       ],
     },
@@ -2273,6 +2475,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-proto.
    */
+
   "no-proto": "error",
 
   /**
@@ -2280,6 +2483,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-redeclare.
    */
+
   "no-redeclare": [
     "error",
     {
@@ -2292,6 +2496,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-restricted-properties.
    */
+
   "no-restricted-properties": [
     "error",
     {
@@ -2349,6 +2554,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-return-assign.
    */
+
   "no-return-assign": ["error", "always"],
 
   /**
@@ -2356,6 +2562,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-return-await.
    */
+
   "no-return-await": "error",
 
   /**
@@ -2363,6 +2570,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-script-url.
    */
+
   "no-script-url": "error",
 
   /**
@@ -2370,6 +2578,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-self-assign.
    */
+
   "no-self-assign": [
     "error",
     {
@@ -2382,6 +2591,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-self-compare.
    */
+
   "no-self-compare": "error",
 
   /**
@@ -2389,6 +2599,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-sequences.
    */
+
   "no-sequences": "error",
 
   /**
@@ -2396,6 +2607,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-throw-literal.
    */
+
   "no-throw-literal": "error",
 
   /**
@@ -2403,6 +2615,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-unmodified-loop-condition.
    */
+
   "no-unmodified-loop-condition": "error",
 
   /**
@@ -2410,6 +2623,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-unused-expressions.
    */
+
   "no-unused-expressions": [
     "error",
     {
@@ -2426,6 +2640,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-unused-labels.
    */
+
   "no-unused-labels": "error",
 
   /**
@@ -2437,6 +2652,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-useless-call.
    */
+
   "no-useless-call": "off",
 
   /**
@@ -2444,6 +2660,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-useless-catch.
    */
+
   "no-useless-catch": "error",
 
   /**
@@ -2451,6 +2668,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-useless-concat.
    */
+
   "no-useless-concat": "error",
 
   /**
@@ -2458,6 +2676,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-useless-escape.
    */
+
   "no-useless-escape": "error",
 
   /**
@@ -2467,6 +2686,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-useless-return.
    */
+
   "no-useless-return": "error",
 
   /**
@@ -2474,6 +2694,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-void.
    */
+
   "no-void": "error",
 
   /**
@@ -2485,6 +2706,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-warning-comments.
    */
+
   "no-warning-comments": [
     "off",
     {
@@ -2498,6 +2720,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-with.
    */
+
   "no-with": "error",
 
   /**
@@ -2508,6 +2731,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/prefer-named-capture-group.
    */
+
   "prefer-named-capture-group": "off",
 
   /**
@@ -2515,6 +2739,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/prefer-promise-reject-errors.
    */
+
   "prefer-promise-reject-errors": "error",
 
   /**
@@ -2522,6 +2747,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/radix.
    */
+
   radix: ["error", "as-needed"],
 
   /**
@@ -2534,6 +2760,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/require-await.
    */
+
   "require-await": "error",
 
   /**
@@ -2541,6 +2768,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/require-unicode-regexp.
    */
+
   "require-unicode-regexp": "off",
 
   /**
@@ -2548,6 +2776,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/vars-on-top.
    */
+
   "vars-on-top": "off",
 
   /**
@@ -2555,6 +2784,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/wrap-iife.
    */
+
   "wrap-iife": [
     "error",
     "outside",
@@ -2568,6 +2798,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/yoda.
    */
+
   yoda: [
     "error",
     "never",
@@ -2585,6 +2816,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/arrow-body-style.
    */
+
   "arrow-body-style": ["error", "as-needed"],
 
   /**
@@ -2594,6 +2826,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/arrow-parens.
    */
+
   "arrow-parens": [
     "error",
     "as-needed",
@@ -2609,6 +2842,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/arrow-spacing.
    */
+
   "arrow-spacing": [
     "error",
     {
@@ -2622,6 +2856,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/constructor-super.
    */
+
   "constructor-super": "error",
 
   /**
@@ -2631,6 +2866,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/generator-star-spacing.
    */
+
   "generator-star-spacing": [
     "error",
     {
@@ -2644,6 +2880,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-class-assign.
    */
+
   "no-class-assign": "error",
 
   /**
@@ -2653,6 +2890,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-confusing-arrow.
    */
+
   "no-confusing-arrow": [
     "error",
     {
@@ -2665,6 +2903,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-const-assign.
    */
+
   "no-const-assign": "error",
 
   /**
@@ -2672,6 +2911,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-dupe-class-members.
    */
+
   "no-dupe-class-members": "error",
 
   /**
@@ -2679,6 +2919,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-duplicate-imports.
    */
+
   "no-duplicate-imports": [
     "error",
     {
@@ -2691,6 +2932,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-new-symbol.
    */
+
   "no-new-symbol": "error",
 
   /**
@@ -2698,6 +2940,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-restricted-imports.
    */
+
   "no-restricted-imports": [
     "error",
     {
@@ -2711,6 +2954,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-this-before-super.
    */
+
   "no-this-before-super": "error",
 
   /**
@@ -2720,6 +2964,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-useless-computed-key.
    */
+
   "no-useless-computed-key": "error",
 
   /**
@@ -2727,6 +2972,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-useless-constructor.
    */
+
   "no-useless-constructor": "error",
 
   /**
@@ -2737,6 +2983,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-useless-rename.
    */
+
   "no-useless-rename": [
     "error",
     {
@@ -2751,6 +2998,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-var.
    */
+
   "no-var": "off",
 
   /**
@@ -2761,6 +3009,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/object-shorthand.
    */
+
   "object-shorthand": ["off", "consistent-as-needed"],
 
   /**
@@ -2768,6 +3017,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/prefer-arrow-callback.
    */
+
   "prefer-arrow-callback": [
     "error",
     {
@@ -2784,6 +3034,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/prefer-const.
    */
+
   "prefer-const": [
     "error",
     {
@@ -2797,6 +3048,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/prefer-destructuring.
    */
+
   "prefer-destructuring": [
     "error",
     {
@@ -2822,6 +3074,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/prefer-numeric-literals.
    */
+
   "prefer-numeric-literals": "error",
 
   /**
@@ -2829,6 +3082,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/prefer-rest-params.
    */
+
   "prefer-rest-params": "error",
 
   /**
@@ -2836,6 +3090,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/prefer-spread.
    */
+
   "prefer-spread": "error",
 
   /**
@@ -2845,6 +3100,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/prefer-template.
    */
+
   "prefer-template": "error",
 
   /**
@@ -2852,6 +3108,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/require-yield.
    */
+
   "require-yield": "error",
 
   /**
@@ -2861,6 +3118,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/rest-spread-spacing.
    */
+
   "rest-spread-spacing": ["error", "never"],
 
   /**
@@ -2870,6 +3128,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/sort-imports.
    */
+
   "sort-imports": [
     "off",
     {
@@ -2885,6 +3144,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/symbol-description.
    */
+
   "symbol-description": "error",
 
   /**
@@ -2895,6 +3155,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/template-curly-spacing.
    */
+
   "template-curly-spacing": ["error", "never"],
 
   /**
@@ -2904,12 +3165,14 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/yield-star-spacing.
    */
+
   "yield-star-spacing": [
     "error",
     {
       after: true,
     },
   ],
+
   /**
    * Require or disallow initialization in variable declarations.
    *
@@ -2918,6 +3181,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/init-declarations.
    */
+
   "init-declarations": [
     "off",
     "never",
@@ -2935,6 +3199,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-delete-var.
    */
+
   "no-delete-var": "off",
 
   /**
@@ -2942,6 +3207,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-label-var.
    */
+
   "no-label-var": "error",
 
   /**
@@ -2952,6 +3218,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-restricted-globals.
    */
+
   "no-restricted-globals": ["error", "isFinite", "isNaN"].concat(
     confusingBrowserGlobals
   ),
@@ -2962,6 +3229,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-shadow.
    */
+
   "no-shadow": [
     "error",
     {
@@ -2994,6 +3262,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-shadow-restricted-names.
    */
+
   "no-shadow-restricted-names": "error",
 
   /**
@@ -3002,6 +3271,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-undef.
    */
+
   "no-undef": [
     "error",
     {
@@ -3014,6 +3284,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-undef-init.
    */
+
   "no-undef-init": "error",
 
   /**
@@ -3024,6 +3295,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-undefined.
    */
+
   "no-undefined": "off",
 
   /**
@@ -3037,16 +3309,19 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-unused-vars.
    */
+
   "no-unused-vars": [
     "warn",
     {
       vars: "all",
 
       // VarsIgnorePattern: "[iI]gnore",
+
       args: "after-used",
       ignoreRestSiblings: true,
 
       // ArgsIgnorePattern: "^_",
+
       caughtErrors: "none",
 
       // CaughtErrorsIgnorePattern: "^ignore",
@@ -3063,6 +3338,7 @@ module.exports = {
    *
    * Https://eslint.org/docs/rules/no-use-before-define.
    */
+
   "no-use-before-define": [
     "error",
     {
