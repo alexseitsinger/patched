@@ -560,7 +560,7 @@ module.exports = {
        * --
        * Default: true
        */
-      checkFilenames: true,
+      checkFilenames: false,
     },
   ],
 
