@@ -9,6 +9,7 @@ const core = [
   "unicorn",
   "sort-destructure-keys",
   "no-loops",
+  "prettier",
 ]
 const react = ["react", "react-perf", "react-hooks", "better-styled-components"]
 const redux = ["react-redux", "redux-saga"]
