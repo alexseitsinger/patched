@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/alexseitsinger/qt/issues"
   },
-  "main": "src/linter.js",
+  "main": "src/api.js",
   "bin": "bin/cli.js",
   "files": [
     "src/*",
