@@ -51,13 +51,7 @@ module.exports = {
     useEslint: true,
   }),
   mdTsReactRedux: createConfig({
-    pluginNames: getPlugins([
-      "core",
-      "typescript",
-      "react",
-      "redux",
-      "markdown",
-    ]),
+    pluginNames: getPlugins(["core", "typescript", "react", "redux", "markdown"]),
     useEslint: true,
   }),
   json: createConfig({
