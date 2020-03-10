@@ -1,6 +1,7 @@
 const path = require("path")
-const { CLIEngine } = require("eslint")
+//const { CLIEngine } = require("eslint")
 const { generateConfig } = require("./utils")
+const { CLIEngine } = require("./cli-engine")
 
 const mergeReports = reports => {
   let mergedResults = []
@@ -75,6 +76,7 @@ const lintFiles = (filePaths, options) => {
   const report = runLinter(filePaths, finalOptions)
   return processReport(report, finalOptions)
 }
+
 
 module.exports = {
   lintText,
