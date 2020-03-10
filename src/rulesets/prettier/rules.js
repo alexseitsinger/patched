@@ -12,5 +12,6 @@ module.exports = {
    * to ensure that certain rules for eslint don't override the formatting we
    * apply using prettier.
    */
-  //"prettier/prettier": "warn",
+
+  "prettier/prettier": "warn",
 }
