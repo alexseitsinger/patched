@@ -5,7 +5,7 @@ Comprehensive and opinionated linter and formatter
 *(Inspired by the convenience of [XO](https://github.com/xojs/xo), the [criticism](https://www.freebsd.org/doc/en/books/faq/misc.html#bikeshed-painting) from
 [FreeBSD](https://www.freebsd.org) via [Standard](https://github.com/standard/standard), and more...)*
 
-After compiling a large number of [eslint configs](https://github.com/alexseitsinger/patched-rulesets/src/plugins) for the many
+After compiling a large number of [eslint configs](https://github.com/alexseitsinger/patched-rulesets/tree/master/src/plugins) for the many
 plugins that I try to use, it seemed like a good idea to just bundle them all up together to make things easier. As such,
 [Patched](https://github.com/alexseitsinger/patched) was created!
 
@@ -29,7 +29,7 @@ yarn add patched
    individually.
 4. Plugin groups are automatically determined at runtime by testing for some simple criteria *(eg: file extension, source code
    content, dependency existence, etc.)*
-2. Each plugin used has its own [ruleset](https://github.com/alexseitsinger/patched-rulesets/src/plugins) loaded which each contain:
+2. Each plugin used has its own [ruleset](https://github.com/alexseitsinger/patched-rulesets/tree/master/src/plugins) loaded which each contain:
   - `rules`: The default rules to apply for the plugin *(as if it were the only rules used)*.
   - `patches`: A collection of rules to apply to other plugin's because their rules conflict with ours.
   - `options`: Any additional options that may need to be included within the final `eslint config`. (ie: `tsconfigRootDir`, `project`, `import/resolver`, etc.)
