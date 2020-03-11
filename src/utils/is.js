@@ -147,19 +147,19 @@ export const isRedux = async inputs => {
 }
 
 export const isTypeScript = async inputs => {
+  const hasDependency = await hasProjectDependency("typescript")
   const hasExtension = isTypeScriptFile(inputs)
   const hasSource = isTypeScriptSource(inputs)
-  const hasDependencies = await hasProjectDependency("typescript")
   const hasFiles = await hasTypeScriptFiles(inputs)
-  return hasExtension || hasSource || hasDependencies || hasFiles
+  return hasDependency && (hasExtension || hasSource || hasFiles)
 }
 
 export const isTypeScriptSync = inputs => {
-  const isExtension = isTypeScriptFile(inputs)
-  const isSource = isTypeScriptSource(inputs)
-  const hasDep = hasProjectDependencySync("typescript")
+  const hasDependency = hasProjectDependencySync("typescript")
+  const hasExtension = isTypeScriptFile(inputs)
+  const hasSource = isTypeScriptSource(inputs)
   const hasFiles = hasTypeScriptFilesSync(inputs)
-  return isExtension || isSource || hasDep || hasFiles
+  return hasDependency && (hasExtension || hasSource || hasFiles)
 }
 
 export const isWebpack = async inputs => {
