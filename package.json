@@ -18,11 +18,16 @@
   "main": "src/api.js",
   "bin": "bin/cli.js",
   "files": [
+    "dist/*",
     "src/*",
     "bin/*",
     "README.md",
     "LICENSE"
   ],
+  "scripts": {
+    "build": "yarn webpack",
+    "test": "yarn jest"
+  },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^2.23.0",
     "@typescript-eslint/parser": "^2.23.0",
@@ -58,9 +63,11 @@
     "eslint-plugin-unicorn": "^17.0.1",
     "eslint-plugin-unused-imports": "^0.1.2",
     "execa": "^4.0.0",
+    "fast-glob": "^3.2.2",
     "get-stdin": "^7.0.0",
     "lodash": "^4.17.15",
     "meow": "^6.0.1",
+    "pkg-dir": "^4.2.0",
     "prettier": "^1.19.1",
     "read-pkg-up": "^7.0.1",
     "redux-saga": "^1.1.3",
@@ -69,7 +76,11 @@
     "webpack": "^4.42.0"
   },
   "devDependencies": {
-    "jest": "^25.1.0"
+    "clean-webpack-plugin": "^3.0.0",
+    "jest": "^25.1.0",
+    "terser-webpack-plugin": "^2.3.5",
+    "webpack-cli": "^3.3.11",
+    "webpack-node-externals": "^1.7.2"
   },
   "keywords": [
     "eslint",
