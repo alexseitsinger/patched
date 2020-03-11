@@ -1,5 +1,6 @@
 .yalc/
 yalc.lock
+dist/
 
 ### Node ###
 # Logs
