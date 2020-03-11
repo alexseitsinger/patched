@@ -29,6 +29,7 @@
     "test": "yarn jest"
   },
   "dependencies": {
+    "@babel/runtime": "^7.8.7",
     "@typescript-eslint/eslint-plugin": "^2.23.0",
     "@typescript-eslint/parser": "^2.23.0",
     "confusing-browser-globals": "^1.0.9",
@@ -76,6 +77,9 @@
     "webpack": "^4.42.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
     "jest": "^25.1.0",
     "terser-webpack-plugin": "^2.3.5",
