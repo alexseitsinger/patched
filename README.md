@@ -1,6 +1,6 @@
 # Patched
 
-Comprehensive and opinionated linter and formatter
+Comprehensive and opinionated linter and formatter *(it's just an [ESLint](https://github.com/eslint/eslint) wrapper)*
 
 *(Inspired by the convenience of [XO](https://github.com/xojs/xo), the [criticism](https://www.freebsd.org/doc/en/books/faq/misc.html#bikeshed-painting) from
 [FreeBSD](https://www.freebsd.org) via [Standard](https://github.com/standard/standard), and more...)*
