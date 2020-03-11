@@ -1,10 +1,10 @@
-# QT (Make your ecmascript a cutie!)
+# QT
 
-Comprehensive and opinionated wrapper for eslint.
+Comprehensive and opnionated linter and formatter. Inspired by the fantastic [XO](https://github.com/xojs/xo) and [Standard](https://github.com/standard/standard).
 
-No .eslintrc required.
+This was created simply because I got tired of manually installing all the eslint plugins that I use in each of my packages (and the related config files).
 
-Uses a .qtrc.js to enable plugin groups.
+Things should work, but it's still a work-in-progress.
 
 ## Installation
 
@@ -12,8 +12,15 @@ Uses a .qtrc.js to enable plugin groups.
 yarn add qt
 ```
 
-## Summary of rules
+## Features
 
+1. Generates the configuration using plugin groups.
+2. Each plugin has a [https://github.com/qt-rulesets](ruleset) which includes it's rules, a collection of patches to apply to other plugin's rules, and the options to include
+(ie: project: './tsconfig.json' in parserOptions, etc.)
+3. Detects the plugins (groups) to use automatically based on some basic criteria (file extensions, source code content, dependency existence, etc.)
+4. I probably forgot some stuff, so this will be updated later.
+
+## Rule Summary
 space type               | space
 space size               | 2
 if/else style            | stroustrup
@@ -23,15 +30,7 @@ quote props              | when necessary
 line length              | 88
 implicit arrow linebreak | off
 
-## Plugin Groups
+## Integrations
 
-
-
-## Inspiration
-
-This project was heavily inspired by the fantastic XOJS project. However, since the rules I use differ from their
-defaults, I decided to simply put a plugin together. After accumulating a large number of eslint configs for dozens of
-plugins, I decided it was time to combine them into a single plugin to make using them easier.
-
-
+1. [https://github.com/neoclide/coc.nvim](coc.nvim) Forking (https://github.com/neoclide/coc-eslint)[coc-eslint] was simple enough, so qt integration will be available soon.
 
