@@ -35,9 +35,9 @@ yarn add patched
   - `options`: Any additional options that may need to be included within the final `eslint config`. (ie: `tsconfigRootDir`, `project`, `import/resolver`, etc.)
 3. Plugins are always loaded in the same order, and the final config is generated in 3 stages to ensure the rules used are
    always what's expected.
-  1. Load the rulesets for each plugin.
-  2. Apply the rules for each plugin *(in order)*
-  3. Find & apply any patches *(from any sibling rulesets)*.
+  - Load the rulesets for each plugin.
+  - Apply the rules for each plugin *(in order)*
+  - Find & apply any patches *(from any sibling rulesets)*.
 
 ## Summary
 
