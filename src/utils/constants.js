@@ -21,7 +21,7 @@ export const TYPESCRIPT_SOURCES = ["type ", "interface "]
 
 export const JEST_SOURCES = ["describe(", "it(", "test(", "expect("]
 
-export const TYPESCRIPT_EXTENSIONS = [".ts", ".tsx"]
+export const TYPESCRIPT_EXTENSIONS = ["ts", "tsx"]
 
 export const TYPESCRIPT_PATTERNS = TYPESCRIPT_EXTENSIONS.map(
   extension => `**/*.${extension}`
