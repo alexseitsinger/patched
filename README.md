@@ -21,6 +21,9 @@ yarn add qt
 4. I probably forgot some stuff, so this will be updated later.
 
 ## Rule Summary
+
+Name                     | Value
+---                      | ---
 space type               | space
 space size               | 2
 if/else style            | stroustrup
