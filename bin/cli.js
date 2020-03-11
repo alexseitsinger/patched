@@ -47,19 +47,20 @@ const printReport = report => {
   process.exitCode = report.errorCount === 0 ? 0 : 1
 }
 
-/* eslint-disable */
 (async () => {
   if (options.stdin) {
-    const stdin = await getStdin()
+    const stdin = input.shift()
 
-    if (options.fix) {
-      const result = await linter.lintText(stdin, options).results[0]
-      console.log(result.output || stdin)
-      return
+    if (stdin) {
+      if (options.fix) {
+        const result = await linter.lintText(stdin, options).results[0]
+        console.log(result.output || stdin)
+        return
+      }
+
+      const report = await linter.lintText(stdin, options)
+      printReport(report)
     }
-
-    const report = await linter.lintText(stdin, options)
-    printReport(report)
   } else {
     const report = await linter.lintFiles(input, options)
 
