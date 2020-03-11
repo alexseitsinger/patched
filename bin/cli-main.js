@@ -2,7 +2,7 @@
 
 const formatterPretty = require("eslint-formatter-pretty")
 const getStdin = require("get-stdin")
-const linter = require("../src/linter")
+const linter = require("../dist/linter")
 const meow = require("meow")
 
 const { flags: options, input } = meow(
@@ -53,12 +53,13 @@ const printReport = report => {
     const stdin = await getStdin()
 
     if (options.fix) {
-      const result = linter.lintText(stdin, options).results[0]
+      const result = await linter.lintText(stdin, options).results[0]
       console.log(result.output || stdin)
       return
     }
 
-    printReport(linter.lintText(stdin, options))
+    const report = await linter.lintText(stdin, options)
+    printReport(report)
   } else {
     const report = await linter.lintFiles(input, options)
 
