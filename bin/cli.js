@@ -8,7 +8,7 @@ const meow = require("meow")
 const { flags: options, input } = meow(
   `
   Usage
-    $ qt [<file> ...]
+    $ patched [<file> ...]
 
   Options
     --fix                 Fix issues
@@ -17,9 +17,9 @@ const { flags: options, input } = meow(
     --stdin-filename      Specify a filename for the --stdin option
 
   Examples
-    $ qt
-    $ qt --fix index.js
-    $ qt --fix --errors index.js
+    $ patched
+    $ patched --fix index.js
+    $ patched --fix --errors index.js
 `,
   {
     flags: {
