@@ -1,13 +1,72 @@
 #!/usr/bin/env node
 
-const resolveCwd = require("resolve-cwd")
+const formatterPretty = require("eslint-formatter-pretty")
+const getStdin = require("get-stdin")
+const linter = require("../dist/linter")
+const meow = require("meow")
 
-const localLinter = resolveCwd.silent("qt/bin/cli")
+const { flags: options, input } = meow(
+  `
+  Usage
+    $ qt [<file> ...]
 
-if (localLinter && localLinter !== __filename) {
-  console.log("Using local linter")
-  require(localLinter)
-} else {
-  console.log("Using real linter")
-  require("./cli-main")
+  Options
+    --fix                 Fix issues
+    --errors              Only show errors (no warnings)
+    --stdin               Validate/fix code from stdin
+    --stdin-filename      Specify a filename for the --stdin option
+
+  Examples
+    $ qt
+    $ qt --fix index.js
+    $ qt --fix --errors index.js
+`,
+  {
+    flags: {
+      errors: {
+        type: "boolean",
+      },
+      fix: {
+        type: "boolean",
+      },
+    },
+  }
+)
+
+if (input[0] === "-") {
+  options.stdin = true
+  input.shift()
 }
+
+const printReport = report => {
+  const reporter = options.reporter
+    ? linter.getFormatter(options.reporter)
+    : formatterPretty
+
+  process.stdout.write(reporter(report.results))
+  process.exitCode = report.errorCount === 0 ? 0 : 1
+}
+
+/* eslint-disable */
+(async () => {
+  if (options.stdin) {
+    const stdin = await getStdin()
+
+    if (options.fix) {
+      const result = await linter.lintText(stdin, options).results[0]
+      console.log(result.output || stdin)
+      return
+    }
+
+    const report = await linter.lintText(stdin, options)
+    printReport(report)
+  } else {
+    const report = await linter.lintFiles(input, options)
+
+    if (options.fix) {
+      linter.outputFixes(report)
+    }
+
+    printReport(report)
+  }
+})()
