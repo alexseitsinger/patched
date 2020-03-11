@@ -1,4 +1,4 @@
-const configs = require("./src/presets")
+const { configs } = require("qt-rulesets")
 
 module.exports = {
   overrides: [
