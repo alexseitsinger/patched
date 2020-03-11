@@ -1,9 +1,12 @@
-const { CLIEngine } = require("./cli-engine")
-const { Linter, RuleTester, SourceCode } = require("eslint")
+import { CLIEngine as ESLintCLIEngine } from "eslint"
 
-module.exports = {
-  CLIEngine: CLIEngine,
-  Linter,
-  RuleTester,
-  SourceCode,
+import { getOptionsSync } from "./utils/config"
+export { Linter, RuleTester, SourceCode } from "eslint"
+
+export class CLIEngine extends ESLintCLIEngine {
+  constructor(providedOptions) {
+    const finalOptions = getOptionsSync([], providedOptions)
+    console.log(finalOptions)
+    super(finalOptions)
+  }
 }
