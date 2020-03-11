@@ -39,7 +39,8 @@ module.exports = {
   ],
   externals: [
     new NodeExternals({
-      whitelist: ["qt-rulesets", "fast-glob", "del", "tempy"],
+      whitelist: ["patched-rulesets", "fast-glob", "del", "tempy", "read-pkg-up",
+        "pkg-dir"],
       modulesFromFile: {
         include: ["devDependencies", "dependencies"],
       },
