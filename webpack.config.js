@@ -39,8 +39,9 @@ module.exports = {
   ],
   externals: [
     new NodeExternals({
+      whitelist: ["qt-rulesets", "fast-glob", "del", "tempy"],
       modulesFromFile: {
-        include: ["dependencies", "devDependencies", "peerDependencies"],
+        include: ["devDependencies", "dependencies"],
       },
     }),
   ],
