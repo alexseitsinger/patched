@@ -2,7 +2,7 @@ import fs from "fs"
 import path from "path"
 
 import del from "del"
-import { createConfig, getPlugins } from "qt-rulesets"
+import { createConfig, getPlugins } from "patched-rulesets"
 import tempy from "tempy"
 
 import { EXCLUDED_GROUPS, PROJECT_ROOT } from "./constants"
