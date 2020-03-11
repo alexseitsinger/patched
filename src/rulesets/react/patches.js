@@ -1,3 +1,0 @@
-// react plugin
-
-module.exports = {}
