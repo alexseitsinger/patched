@@ -1,7 +1,7 @@
 {
-  "name": "qt",
+  "name": "patched",
   "version": "0.1.0",
-  "description": "QT is a comprehensive and opinionated linter and formatter",
+  "description": "Patched is a comprehensive and opinionated linter and formatter",
   "author": {
     "email": "software@alexseitsinger.com",
     "name": "Alex Seitsinger"
@@ -9,11 +9,11 @@
   "license": "BSD-2-Clause",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexseitsinger/qt.git"
+    "url": "https://github.com/alexseitsinger/patched.git"
   },
-  "homepage": "https://github.com/alexseitsinger/qt",
+  "homepage": "https://github.com/alexseitsinger/patched",
   "bugs": {
-    "url": "https://github.com/alexseitsinger/qt/issues"
+    "url": "https://github.com/alexseitsinger/patched/issues"
   },
   "main": "dist/api.js",
   "bin": "bin/cli.js",
@@ -67,7 +67,7 @@
     "meow": "^6.0.1",
     "pkg-dir": "^4.2.0",
     "prettier": "^1.19.1",
-    "qt-rulesets": "^0.1.0",
+    "patched-rulesets": "^0.1.0",
     "read-pkg-up": "^7.0.1",
     "resolve-cwd": "^3.0.0",
     "tempy": "^0.5.0",
