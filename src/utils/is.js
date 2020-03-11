@@ -5,26 +5,15 @@ import isArray from "lodash/isArray"
 import isString from "lodash/isString"
 import pkgDir from "pkg-dir"
 
-import { hasDependency, readPackageJson } from "./dependencies"
-
-const REACT_SOURCES = [' from "react="', "/** @jsx jsx */"]
-const TYPESCRIPT_SOURCES = ["type ", "interface "]
-const JEST_SOURCES = ["describe(", "it(", "test(", "expect("]
-const TYPESCRIPT_EXTENSIONS = [".ts", ".tsx"]
-const TYPESCRIPT_PATTERNS = TYPESCRIPT_EXTENSIONS.map(extension => `**/*.${extension}`)
-const SEARCH_PROJECT_OPTIONS = {
-  deep: 2,
-  followSymbolicLinks: false,
-  ignore: [
-    "**/node_modules/**",
-    "**/.yalc/**",
-    "**/build/**",
-    "**/dist/**",
-    "webpack.config.js",
-    "babel.config.js",
-    "bin/*",
-  ],
-}
+import {
+  JEST_SOURCES,
+  REACT_SOURCES,
+  SEARCH_PROJECT_OPTIONS,
+  TYPESCRIPT_EXTENSIONS,
+  TYPESCRIPT_PATTERNS,
+  TYPESCRIPT_SOURCES,
+} from "./constants"
+import { hasProjectDependency, hasProjectDependencySync } from "./dependencies"
 
 export function isReactSource(code) {
   if (!isString(code)) {
@@ -44,14 +33,8 @@ export function isJestSource(code) {
   }).includes(true)
 }
 
-export function isTypeScriptProject() {
-  const packageJson = readPackageJson()
-  return hasDependency(packageJson, "typescript")
-}
-
 export function searchProjectSync(globPatterns) {
   const cwd = pkgDir.sync()
-  console.log("pkgDir:", cwd)
   return fastGlob.sync(globPatterns, {
     cwd,
     ...SEARCH_PROJECT_OPTIONS,
@@ -60,7 +43,6 @@ export function searchProjectSync(globPatterns) {
 
 export async function searchProject(globPatterns) {
   const cwd = await pkgDir()
-  console.log("pkgDir:", cwd)
   return fastGlob(globPatterns, {
     cwd,
     ...SEARCH_PROJECT_OPTIONS,
@@ -75,8 +57,17 @@ export async function hasTypeScriptFiles() {
   return (await searchProject(TYPESCRIPT_PATTERNS).length) > 0
 }
 
-export function isTypeScriptFile(extension) {
-  return TYPESCRIPT_EXTENSIONS.includes(extension)
+export function isTypeScriptFile(file) {
+  const target = file
+  if (isArray(target)) {
+    return target.map(fn => isTypeScriptFile(fn)).includes(true)
+  }
+  if (isString(file)) {
+    const bits = file.split(".")
+    const extension = bits.pop()
+    return TYPESCRIPT_EXTENSIONS.includes(extension)
+  }
+  return false
 }
 
 export function isJSONSource(code) {
@@ -131,4 +122,64 @@ export function isJavaScriptFiles(inputFiles = []) {
       return fn.endsWith(".js") || fn.endsWith(".jsx")
     })
     .every(r => r === true)
+}
+
+export const isReactSync = inputs => {
+  const hasDependency = hasProjectDependencySync("react")
+  const hasSource = isReactSource(inputs)
+  return hasDependency || hasSource
+}
+
+export const isReact = async inputs => {
+  const hasDependency = await hasProjectDependency("react")
+  const hasSource = isReactSource(inputs)
+  return hasDependency || hasSource
+}
+
+export const isReduxSync = inputs => {
+  const hasDep = hasProjectDependencySync("redux")
+  return hasDep
+}
+
+export const isRedux = async inputs => {
+  const hasDep = await hasProjectDependency("redux")
+  return hasDep
+}
+
+export const isTypeScript = async inputs => {
+  const hasExtension = isTypeScriptFile(inputs)
+  const hasSource = isTypeScriptSource(inputs)
+  const hasDependencies = await hasProjectDependency("typescript")
+  const hasFiles = await hasTypeScriptFiles(inputs)
+  return hasExtension || hasSource || hasDependencies || hasFiles
+}
+
+export const isTypeScriptSync = inputs => {
+  const isExtension = isTypeScriptFile(inputs)
+  const isSource = isTypeScriptSource(inputs)
+  const hasDep = hasProjectDependencySync("typescript")
+  const hasFiles = hasTypeScriptFilesSync(inputs)
+  return isExtension || isSource || hasDep || hasFiles
+}
+
+export const isWebpack = async inputs => {
+  const hasDependency = await hasProjectDependency("webpack")
+  return hasDependency
+}
+
+export const isWebpackSync = inputs => {
+  const hasDep = hasProjectDependencySync("webpack")
+  return hasDep
+}
+
+export const isJest = async inputs => {
+  const hasDependency = await hasProjectDependency("jest")
+  const hasSource = isJestSource(inputs)
+  return hasDependency || hasSource
+}
+
+export const isJestSync = inputs => {
+  const hasDep = hasProjectDependencySync("jest")
+  const hasSource = isJestSource(inputs)
+  return hasDep || hasSource
 }

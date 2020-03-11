@@ -19,7 +19,8 @@ export const lintFiles = async (filePaths, options) => {
   // Const filteredFilePaths = filePaths.filter(fp => !linter.isPathIgnored(fp))
 
   const report = linter.executeOnFiles(filePaths, options)
-  return processReport(report, finalOptions)
+  const processed = processReport(report, finalOptions)
+  return processed
 }
 
 export const { getFormatter } = CLIEngine

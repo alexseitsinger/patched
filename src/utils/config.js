@@ -1,41 +1,43 @@
+import fs from "fs"
 import path from "path"
 
+import del from "del"
 import { createConfig, getPlugins } from "qt-rulesets"
+import tempy from "tempy"
 
-import { usesDependency, usesDependencySync } from "./dependencies"
+import { EXCLUDED_GROUPS, PROJECT_ROOT } from "./constants"
 import {
-  hasTypeScriptFiles,
-  hasTypeScriptFilesSync,
-  isJestSource,
+  isJest,
+  isJestSync,
   isJsonFiles,
   isPackageJsonFile,
-  isReactSource,
-  isTypeScriptSource,
+  isReact,
+  isReactSync,
+  isRedux,
+  isReduxSync,
+  isTypeScript,
+  isTypeScriptSync,
+  isWebpack,
+  isWebpackSync,
 } from "./is"
-
-const EXCLUDED_GROUPS = ["packageJson", "json"]
 
 export function determineFeaturesSync(inputs) {
   return {
-    react: usesDependencySync("react") || isReactSource(inputs),
-    redux: usesDependencySync("redux"),
-    typescript:
-      usesDependencySync("typescript") &&
-      (hasTypeScriptFilesSync() || isTypeScriptSource(inputs)),
-    webpack: usesDependencySync("webpack"),
-    jest: usesDependencySync("jest") || isJestSource(inputs),
+    react: isReactSync(inputs),
+    redux: isReduxSync(inputs),
+    typescript: isTypeScriptSync(inputs),
+    webpack: isWebpackSync(inputs),
+    jest: isJestSync(inputs),
   }
 }
 
-export async function determineFeatures(inputFiles) {
+export async function determineFeatures(inputs) {
   return {
-    react: (await usesDependency("react")) || isReactSource(inputFiles),
-    redux: await usesDependency("redux"),
-    typescript:
-      (await usesDependency("typescript")) &&
-      ((await hasTypeScriptFiles()) || isTypeScriptSource(inputFiles)),
-    webpack: await usesDependency("webpack"),
-    jest: (await usesDependency("jest")) || isJestSource(inputFiles),
+    react: await isReact(inputs),
+    redux: await isRedux(inputs),
+    typescript: await isTypeScript(inputs),
+    webpack: await isWebpack(inputs),
+    jest: await isJest(inputs),
   }
 }
 
@@ -99,6 +101,47 @@ function shouldUseEslint(pluginGroups) {
   return true
 }
 
+export const createFile = (data, options) => {
+  const file = tempy.file(options)
+  fs.writeFileSync(file, data, { encoding: "utf8" })
+  const clean = async () => {
+    const removed = await del([file])
+    console.log(`Successfully delete temporary file: ${removed}`)
+  }
+  return [file, clean]
+}
+
+export const getTsConfig = () => {
+  const config = {
+    include: ["src"],
+    exclude: ["tests", "node_modules", ".yalc", "build", "dist"],
+    compilerOptions: {
+      noEmitOnError: true,
+      noErrorTruncation: true,
+      noImplicitAny: false,
+      noImplicitReturns: true,
+      noImplicitThis: true,
+      noUnusedLocals: true,
+      noUnusedParameters: true,
+      removeComments: true,
+      resolveJsonModule: true,
+      strictNullChecks: true,
+      sourceMap: false,
+      noFallthroughCasesInSwitch: true,
+      esModuleInterop: true,
+      allowSyntheticDefaultImports: true,
+      jsx: "preserve",
+      lib: ["es2015", "dom"],
+      target: "es2015",
+      module: "esnext",
+      moduleResolution: "node",
+    },
+  }
+  const data = JSON.stringify(config)
+  const [file, clean] = createFile(data, { extension: "json" })
+  return file
+}
+
 export function generateConfigSync(inputs) {
   const pluginGroups = determinePluginGroupsSync(inputs)
   const useEslint = shouldUseEslint(pluginGroups)
@@ -122,23 +165,23 @@ export async function generateConfig(inputFiles) {
 }
 
 function getOptionsWithConfig(config, options) {
-  const currentDirectory = path.resolve(options.cwd || process.cwd())
-  console.log("curDir (getOptions):", currentDirectory)
-  return {
+  const newOptions = {
+    ...options,
     useEslintrc: false,
     baseConfig: {
       settings: config.settings,
     },
+    parser: config.parser || "espree",
     parserOptions: config.parserOptions,
     envs: Object.keys(config.env),
     rules: config.rules,
     plugins: config.plugins,
-
-    /*
-     * ResolvePluginsRelativeTo: projectRoot,
-     * cwd: projectRoot,
-     */
+    cwd: path.resolve(options.cwd || process.cwd()),
   }
+  if (newOptions.parser === "@typescript-eslint/parser") {
+    newOptions.parserOptions.project = `${PROJECT_ROOT}/tsconfig.json`
+  }
+  return newOptions
 }
 
 export async function getOptions(files, options) {

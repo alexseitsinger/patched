@@ -3,22 +3,16 @@ import path from "path"
 
 import readPkgUp from "read-pkg-up"
 
-const PROJECT_ROOT = path.resolve(process.cwd())
-const DEPENDENCY_KEYS = [
-  "dependencies",
-  "devDependencies",
-  "peerDependencies",
-  "optionalDependencies",
-]
+import { DEPENDENCY_KEYS, PROJECT_ROOT } from "./constants"
 
-export function readPackageJson() {
+export function readProjectPackageJson() {
   const filePath = path.join(PROJECT_ROOT, "package.json")
   const raw = fs.readFileSync(filePath, { encoding: "utf8" })
   const parsed = JSON.parse(raw)
   return parsed
 }
 
-export function hasDependency(packageJson, name) {
+function hasDependency(packageJson, name) {
   return DEPENDENCY_KEYS.map(key => {
     if (packageJson[key]) {
       const value = packageJson[key]
@@ -29,12 +23,12 @@ export function hasDependency(packageJson, name) {
   }).includes(true)
 }
 
-export function usesDependencySync(name) {
+export function hasProjectDependencySync(name) {
   const { packageJson } = readPkgUp.sync()
   return hasDependency(packageJson, name)
 }
 
-export async function usesDependency(dependencyName) {
+export async function hasProjectDependency(dependencyName) {
   const { packageJson } = await readPkgUp()
   return hasDependency(packageJson, dependencyName)
 }
