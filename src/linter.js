@@ -1,87 +1,29 @@
-const path = require("path")
-//const { CLIEngine } = require("eslint")
-const { generateConfig } = require("./utils")
-const { CLIEngine } = require("./cli-engine")
+import path from "path"
 
-const mergeReports = reports => {
-  let mergedResults = []
-  let mergedErrorCount = 0
-  let mergedWarningCount = 0
+import { CLIEngine } from "./api"
+import { getOptions } from "./utils/config"
+import { processReport } from "./utils/linter"
 
-  reports.forEach(({ errorCount, results, warningCount }) => {
-    mergedResults = [...mergedResults, ...results]
-    mergedErrorCount += errorCount
-    mergedWarningCount += warningCount
-  })
-
-  return {
-    results: mergedResults,
-    errorCount: mergedErrorCount,
-    warningCount: mergedWarningCount,
-  }
+export const lintText = async (string, options) => {
+  const finalOptions = await getOptions(string, options)
+  const linter = new CLIEngine(finalOptions)
+  const fileName = options.filename ? path.relative(options.cwd, options.filename) : ""
+  const report = linter.executeOnText(string, fileName)
+  return processReport(report, finalOptions)
 }
 
-const processReport = (report, options) => ({
-  ...report,
-  results: options.quiet ? CLIEngine.getErrorResults(report.results) : report.results,
-})
-
-const runLinter = (filePaths, options) => {
-  const linter = new CLIEngine(options)
-  const filteredFilePaths = filePaths.filter(fp => !linter.isPathIgnored(fp))
-  const report = linter.executeOnFiles(filteredFilePaths, options)
-  return processReport(report, options)
-}
-
-const lintText = (string, options) => {
-  const finalOptions = {
-    ...options,
-    cwd: path.resolve(options.cwd || process.cwd()),
-    baseConfig: generateConfig(string),
-    useEslintrc: false,
-  }
-
+export const lintFiles = async (filePaths, options) => {
+  const finalOptions = await getOptions(filePaths, options)
   const linter = new CLIEngine(finalOptions)
 
-  if (options.filename) {
-    const fileName = path.relative(options.cwd, options.filename)
+  // Const filteredFilePaths = filePaths.filter(fp => !linter.isPathIgnored(fp))
 
-    if (linter.isPathIgnored(options.filename)) {
-      return {
-        errorCount: 0,
-        warningCount: 0,
-        results: [
-          {
-            errorCount: 0,
-            warningCount: 0,
-            messages: [],
-            filePath: fileName,
-          },
-        ],
-      }
-    }
-  }
-
-  const report = linter.executeOnText(string, options.filename)
+  const report = linter.executeOnFiles(filePaths, options)
   return processReport(report, finalOptions)
 }
 
-const lintFiles = (filePaths, options) => {
-  const finalOptions = {
-    ...options,
-    baseConfig: generateConfig(filePaths),
-    cwd: path.resolve(options.cwd || process.cwd()),
-    useEslintrc: false,
-  }
-  const report = runLinter(filePaths, finalOptions)
-  return processReport(report, finalOptions)
-}
+export const { getFormatter } = CLIEngine
 
+export const { getErrorResults } = CLIEngine
 
-module.exports = {
-  lintText,
-  lintFiles,
-  getFormatter: CLIEngine.getFormatter,
-  getErrorResults: CLIEngine.getErrorResults,
-  outputFixes: CLIEngine.outputFixes,
-}
+export const { outputFixes } = CLIEngine
