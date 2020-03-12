@@ -1,26 +1,25 @@
 import path from "path"
 
 import { CLIEngine } from "./api"
-import { getOptions } from "./utils/config"
+import { getCLIOptions } from "./utils/cli"
 import { processReport } from "./utils/linter"
 
-export const lintText = async (string, options) => {
-  const finalOptions = await getOptions(string, options)
-  const linter = new CLIEngine(finalOptions)
-  const fileName = options.filename ? path.relative(options.cwd, options.filename) : ""
+export const lintText = async (string, providedOptions) => {
+  const cliOptions = await getCLIOptions(string, providedOptions)
+  const linter = new CLIEngine(cliOptions)
+  const fileName = cliOptions.filename
+    ? path.relative(cliOptions.cwd, cliOptions.filename)
+    : ""
   const report = linter.executeOnText(string, fileName)
-  return processReport(report, finalOptions)
+  return processReport(report, cliOptions)
 }
 
-export const lintFiles = async (filePaths, options) => {
-  const finalOptions = await getOptions(filePaths, options)
-  const linter = new CLIEngine(finalOptions)
-
+export const lintFiles = async (filePaths, providedOptions) => {
+  const cliOptions = await getCLIOptions(filePaths, providedOptions)
+  const linter = new CLIEngine(cliOptions)
   // Const filteredFilePaths = filePaths.filter(fp => !linter.isPathIgnored(fp))
-
-  const report = linter.executeOnFiles(filePaths, options)
-  const processed = processReport(report, finalOptions)
-  return processed
+  const report = linter.executeOnFiles(filePaths, providedOptions)
+  return processReport(report, cliOptions)
 }
 
 export const { getFormatter } = CLIEngine
