@@ -1,3 +1,15 @@
+<a name="v0.2.0"></a>
+## [v0.2.0](https://github.com/alexseitsinger/patched/compare/v0.1.1...v0.2.0) (2020-03-12)
+
+### Bug Fixes
+- Fixes stdin. ([afe15a1](https://github.com/alexseitsinger/patched/commit/afe15a12eaf56cc511e6ae1aa3868508da4b3a0e))
+- Fixes typescript extensions. ([7a5cb44](https://github.com/alexseitsinger/patched/commit/7a5cb44b7c92c7f42c130ea7321cc1eee99bdc42))
+
+### Code Refactoring
+- Cleans up api. ([56e0be4](https://github.com/alexseitsinger/patched/commit/56e0be4b3f89a1b4cfa4c44a5363a937ff3c621c))
+- Moves modules. ([b6d358f](https://github.com/alexseitsinger/patched/commit/b6d358f515d2218330dd76c73d6ae8aa4322b6cb))
+
+
 <a name="v0.1.1"></a>
 ## [v0.1.1](https://github.com/alexseitsinger/patched/compare/v0.1.0...v0.1.1) (2020-03-11)
 
