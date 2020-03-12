@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const formatterPretty = require("eslint-formatter-pretty")
-const getStdin = require("get-stdin")
 const linter = require("../dist/linter")
 const meow = require("meow")
 
@@ -48,26 +47,25 @@ const printReport = report => {
 }
 
 (async () => {
-  if (options.stdin) {
-    const stdin = input.shift()
-
-    if (stdin) {
-      if (options.fix) {
-        const result = await linter.lintText(stdin, options).results[0]
-        console.log(result.output || stdin)
-        return
-      }
-
-      const report = await linter.lintText(stdin, options)
-      printReport(report)
-    }
-  } else {
-    const report = await linter.lintFiles(input, options)
-
-    if (options.fix) {
-      linter.outputFixes(report)
+  const isFixing = Boolean(options.fix)
+  const isStdin = Boolean(options.stdin)
+  const target = options.stdin ? input.shift() : input
+  const providedOptions = options
+  if (isStdin) {
+    const report = await linter.lintText(target, providedOptions)
+    if (isFixing) {
+      const result = report.results[0].output
+      console.log(result)
+      return
     }
 
     printReport(report)
+    return
   }
+  const report = await linter.lintFiles(target, providedOptions)
+
+  if (isFixing) {
+    linter.outputFixes(report)
+  }
+  printReport(report)
 })()
