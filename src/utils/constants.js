@@ -2,7 +2,6 @@ import path from "path"
 
 import pkgDir from "pkg-dir"
 
-
 export const EXCLUDED_GROUPS = [ "packageJson", "json" ]
 
 export const DEPENDENCY_KEYS = [
@@ -12,8 +11,8 @@ export const DEPENDENCY_KEYS = [
   "optionalDependencies",
 ]
 
-export const PROJECT_ROOT = pkgDir.sync()
-export const PATCHED_ROOT = path.join(PROJECT_ROOT, "/node_modules/patched")
+export const PROJECT_ROOT = pkgDir.sync() || path.resolve(process.cwd())
+// export const PATCHED_ROOT = path.join(PROJECT_ROOT, "/node_modules/patched")
 
 export const REACT_SOURCES = [ ' from "react="', "/** @jsx jsx */" ]
 export const TYPESCRIPT_SOURCES = [ "type ", "interface " ]
