@@ -65,7 +65,7 @@
     "get-stdin": "^7.0.0",
     "lodash": "^4.17.15",
     "meow": "^6.0.1",
-    "patched-rulesets": "^0.3.2",
+    "patched-rulesets": "^0.3.3",
     "pkg-dir": "^4.2.0",
     "prettier": "^1.19.1",
     "read-pkg-up": "^7.0.1",

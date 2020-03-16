@@ -5747,10 +5747,10 @@ pascalcase@^0.1.1:
   resolved "https://registry.yarnpkg.com/pascalcase/-/pascalcase-0.1.1.tgz#b363e55e8006ca6fe21784d2db22bd15d7917f14"
   integrity sha1-s2PlXoAGym/iF4TS2yK9FdeRfxQ=
 
-patched-rulesets@^0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/patched-rulesets/-/patched-rulesets-0.3.2.tgz#b9e3fb5e81467b6676e6fa9d401938698395273f"
-  integrity sha512-Pw2sLHeTyQx8hgT9yM/7q4goI/bkCksFjAI0WuDqMTN50EUcMDjs6F3H1WOWjOBX8uAIUGu6G+drkxbIT9JiFA==
+patched-rulesets@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/patched-rulesets/-/patched-rulesets-0.3.3.tgz#c8ee9364319803b7458253fcb5e8da1fc61c4a93"
+  integrity sha512-CMmvp2zu1qTVwGAkl1ptIQIiR1Egw3BnoJ3hBBWDvowDBkw4Ok05u8wzdPZwrv+Xaf1ckrV/Cn7FbCaiGGxxAw==
   dependencies:
     confusing-browser-globals "^1.0.9"
     deepmerge "^4.2.2"
