@@ -19,18 +19,14 @@ export function isReactSource(code) {
   if (!isString(code)) {
     return false
   }
-  return REACT_SOURCES.map(k => {
-    return code.includes(k)
-  }).includes(true)
+  return REACT_SOURCES.map(k => code.includes(k)).includes(true)
 }
 
 export function isJestSource(code) {
   if (!isString(code)) {
     return false
   }
-  return JEST_SOURCES.map(k => {
-    return code.includes(k)
-  }).includes(true)
+  return JEST_SOURCES.map(k => code.includes(k)).includes(true)
 }
 
 export function searchProjectSync(globPatterns) {
@@ -74,7 +70,8 @@ export function isJSONSource(code) {
   try {
     JSON.parse(code)
     return true
-  } catch (error) {
+  }
+  catch (error) {
     return false
   }
 }
@@ -93,9 +90,7 @@ export function isTypeScriptSource(code) {
   if (!isString(code)) {
     return false
   }
-  return TYPESCRIPT_SOURCES.map(k => {
-    return code.includes(k)
-  }).includes(true)
+  return TYPESCRIPT_SOURCES.map(k => code.includes(k)).includes(true)
 }
 
 export function isPackageJsonFile(fileName) {
@@ -118,9 +113,7 @@ export function isJavaScriptFiles(inputFiles = []) {
     return false
   }
   return inputFiles
-    .map(fn => {
-      return fn.endsWith(".js") || fn.endsWith(".jsx")
-    })
+    .map(fn => fn.endsWith(".js") || fn.endsWith(".jsx"))
     .every(r => r === true)
 }
 
@@ -147,19 +140,17 @@ export const isRedux = async inputs => {
 }
 
 export const isTypeScript = async inputs => {
-  const hasDependency = await hasProjectDependency("typescript")
   const hasExtension = isTypeScriptFile(inputs)
   const hasSource = isTypeScriptSource(inputs)
   const hasFiles = await hasTypeScriptFiles(inputs)
-  return hasDependency && (hasExtension || hasSource || hasFiles)
+  return (hasExtension || hasSource || hasFiles)
 }
 
 export const isTypeScriptSync = inputs => {
-  const hasDependency = hasProjectDependencySync("typescript")
   const hasExtension = isTypeScriptFile(inputs)
   const hasSource = isTypeScriptSource(inputs)
   const hasFiles = hasTypeScriptFilesSync(inputs)
-  return hasDependency && (hasExtension || hasSource || hasFiles)
+  return (hasExtension || hasSource || hasFiles)
 }
 
 export const isWebpack = async inputs => {
