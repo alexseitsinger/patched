@@ -16,6 +16,7 @@ import {
   isWebpackSync,
 } from "../is"
 
+
 export function determineFeaturesSync(inputs) {
   return {
     react: isReactSync(inputs),
@@ -46,16 +47,16 @@ export function determinePluginGroupsSync(inputFiles) {
   const features = determineFeaturesSync(inputFiles)
   let groups = []
   if (features.jest) {
-    groups = [...groups, "jest"]
+    groups = [ ...groups, "jest" ]
   }
   if (features.redux) {
-    groups = [...groups, "redux"]
+    groups = [ ...groups, "redux" ]
   }
   if (features.react) {
-    groups = [...groups, "react"]
+    groups = [ ...groups, "react" ]
   }
   if (features.typescript) {
-    groups = [...groups, "typescript"]
+    groups = [ ...groups, "typescript" ]
   }
   return groups
 }
@@ -70,25 +71,23 @@ export async function determinePluginGroups(inputFiles) {
   const features = await determineFeatures(inputFiles)
   let groups = []
   if (features.jest) {
-    groups = [...groups, "jest"]
+    groups = [ ...groups, "jest" ]
   }
   if (features.redux) {
-    groups = [...groups, "redux"]
+    groups = [ ...groups, "redux" ]
   }
   if (features.react) {
-    groups = [...groups, "react"]
+    groups = [ ...groups, "react" ]
   }
   if (features.typescript) {
-    groups = [...groups, "typescript"]
+    groups = [ ...groups, "typescript" ]
   }
   return groups
 }
 
 function shouldUseEslint(pluginGroups) {
   const isExcluded = pluginGroups
-    .map(n => {
-      return EXCLUDED_GROUPS.includes(n)
-    })
+    .map(n => EXCLUDED_GROUPS.includes(n))
     .includes(true)
   if (isExcluded) {
     return false
