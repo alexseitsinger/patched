@@ -1,14 +1,24 @@
 import fs from "fs"
 import path from "path"
 
+import pkgDir from "pkg-dir"
 import readPkgUp from "read-pkg-up"
 
-import { DEPENDENCY_KEYS, PROJECT_ROOT } from "./constants"
+import { DEPENDENCY_KEYS } from "./constants"
 
 export function readProjectPackageJson() {
-  const filePath = path.join(PROJECT_ROOT, "package.json")
-  const raw = fs.readFileSync(filePath, { encoding: "utf8" })
-  const parsed = JSON.parse(raw)
+  const filePath = path.join(pkgDir.sync(), "package.json")
+  let raw = "{}"
+  let parsed = {}
+  if (fs.existsSync(filePath)) {
+    raw = fs.readFileSync(filePath, { encoding: "utf8" })
+    try {
+      parsed = JSON.parse(raw)
+    }
+    catch (error) {
+      console.error(`Patched failed to parse project's package.json (${filePath})`)
+    }
+  }
   return parsed
 }
 
