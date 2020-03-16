@@ -1,3 +1,20 @@
+<a name="v0.3.0"></a>
+## [v0.3.0](https://github.com/alexseitsinger/patched/compare/v0.2.0...v0.3.0) (2020-03-16)
+
+### Bug Fixes
+- Changes typescript check ([deb8b07](https://github.com/alexseitsinger/patched/commit/deb8b07addcbb6f858e6faa06347286cf13685ee))
+- Fixes constants. ([6f808d8](https://github.com/alexseitsinger/patched/commit/6f808d8700e9dc12cfd7d41f3544c1780856cd71))
+- Fixes stdin. ([4943341](https://github.com/alexseitsinger/patched/commit/4943341c95feb8fc3db09e7644e1472a88fe6412))
+
+### Code Refactoring
+- Wraps in a try/catch. ([97332b0](https://github.com/alexseitsinger/patched/commit/97332b039a0adc791ae3b004cef41a9cf78464fb))
+
+### Features
+- Adds getConfigForFile. ([e84c085](https://github.com/alexseitsinger/patched/commit/e84c08550a4eb4cd4fb3ec3c384742ac33a5e56d))
+- Adds to cli utils. ([40cfaff](https://github.com/alexseitsinger/patched/commit/40cfaffe33ff473db36e1d41d1c099908f7ec7a1))
+- Implements printConfig. ([85a17a2](https://github.com/alexseitsinger/patched/commit/85a17a22d5157ae4e0af81bac9b730f6deebf396))
+
+
 <a name="v0.2.0"></a>
 ## [v0.2.0](https://github.com/alexseitsinger/patched/compare/v0.1.1...v0.2.0) (2020-03-12)
 
