@@ -4,6 +4,7 @@ const formatterPretty = require("eslint-formatter-pretty")
 const linter = require("../dist/linter")
 const meow = require("meow")
 
+
 const { flags: options, input } = meow(
   `
   Usage
@@ -49,10 +50,11 @@ const printReport = report => {
 (async () => {
   const isFixing = Boolean(options.fix)
   const isStdin = Boolean(options.stdin)
-  const target = options.stdin ? input.shift() : input
+  const target = options.stdin ? input.shift() || "" : input
   const providedOptions = options
   if (isStdin) {
     const report = await linter.lintText(target, providedOptions)
+
     if (isFixing) {
       const result = report.results[0].output
       console.log(result)
