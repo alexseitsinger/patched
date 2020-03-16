@@ -39,10 +39,17 @@ module.exports = {
   ],
   externals: [
     new NodeExternals({
-      whitelist: ["patched-rulesets", "fast-glob", "del", "tempy", "read-pkg-up",
-        "pkg-dir"],
+      whitelist: [
+        "execa",
+        "patched-rulesets",
+        "fast-glob",
+        "del",
+        "tempy",
+        "read-pkg-up",
+        "pkg-dir"
+      ],
       modulesFromFile: {
-        include: ["devDependencies", "dependencies"],
+        include: [ "devDependencies", "dependencies" ],
       },
     }),
   ],
@@ -67,7 +74,7 @@ module.exports = {
   resolve: {
     // MainFields: ["module", "main"],
 
-    extensions: [".json", ".js", ".jsx", ".ts", ".tsx"],
+    extensions: [ ".json", ".js", ".jsx", ".ts", ".tsx" ],
     alias: {
       tests: path.resolve("./tests"),
       src: path.resolve("./src"),
