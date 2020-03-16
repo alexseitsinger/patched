@@ -22,6 +22,12 @@ export const lintFiles = async (filePaths, providedOptions) => {
   return processReport(report, cliOptions)
 }
 
+export const getConfigForFile = async (filePath, providedOptions) => {
+  const cliOptions = await getCLIOptions(filePath, providedOptions)
+  const engine = new CLIEngine(cliOptions)
+  return engine.getConfigForFile(filePath)
+}
+
 export const { getFormatter } = CLIEngine
 
 export const { getErrorResults } = CLIEngine
