@@ -1,4 +1,4 @@
-const { configs } = require("qt-rulesets")
+const { configs } = require("patched-rulesets")
 
 module.exports = {
   overrides: [
