@@ -8,6 +8,6 @@ import { CACHE_DIRECTORY_NAME } from "./constants"
 export * from "./constants"
 
 export const cacheDirectory = findCacheDir({ name: "patched" }) || (
-  path.join((os.home() || os.tmpdir()), `${CACHE_DIRECTORY_NAME}/`)
+  path.join((os.homedir() || os.tmpdir()), `${CACHE_DIRECTORY_NAME}/`)
 )
 
