@@ -91,7 +91,10 @@ function shouldUseEslint(pluginGroups) {
 export function getESLintConfigSync(inputs) {
   const pluginGroups = determinePluginGroupsSync(inputs)
   const useEslint = shouldUseEslint(pluginGroups)
-  const pluginNames = getPlugins(pluginGroups)
+  const pluginNames = getPlugins({
+    names: pluginGroups,
+    isES6: true,
+  })
   const patchedConfig = getPatchedConfigSync()
   return createConfig({ pluginNames, useEslint, patchedConfig })
 }
@@ -99,7 +102,10 @@ export function getESLintConfigSync(inputs) {
 export async function getESLintConfig(inputFiles) {
   const pluginGroups = await determinePluginGroups(inputFiles)
   const useEslint = shouldUseEslint(pluginGroups)
-  const pluginNames = getPlugins(pluginGroups)
+  const pluginNames = getPlugins({
+    names: pluginGroups,
+    isES6: true,
+  })
   const patchedConfig = await getPatchedConfig()
   return createConfig({ pluginNames, useEslint, patchedConfig })
 }
