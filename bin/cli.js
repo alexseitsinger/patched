@@ -2,8 +2,13 @@
 
 const formatterPretty = require("eslint-formatter-pretty")
 const meow = require("meow")
-const { getConfigForFile, getFormatter, lintFiles, lintText, outputFixes } = require("../dist/linter")
-
+const {
+  getConfigForFile,
+  getFormatter,
+  lintFiles,
+  lintText,
+  outputFixes,
+} = require("../dist/linter")
 
 const { flags: options, input } = meow(
   `
@@ -52,13 +57,10 @@ if (input[0] === "-") {
 }
 
 const printReport = report => {
-  const reporter = options.reporter
-    ? getFormatter(options.reporter)
-    : formatterPretty
-
+  const reporter = options.reporter ? getFormatter(options.reporter) : formatterPretty
   process.stdout.write(reporter(report.results))
   process.exitCode = report.errorCount === 0 ? 0 : 1
-}
+};
 
 (async () => {
   const isPrintingConfig = Boolean(options.printConfig)
