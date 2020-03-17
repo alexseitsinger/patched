@@ -1,0 +1,6 @@
+{
+  "spaces": 2,
+  "quotes": "double",
+  "braceStyle": "stroustrup",
+  "maxLength": 88,
+}
