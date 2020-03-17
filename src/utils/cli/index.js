@@ -1,6 +1,7 @@
 import path from "path"
 
 import execa from "execa"
+import { pathExists, pathExistsSync } from "fs-extra"
 
 import { CACHE_DIRECTORY_NAME, cacheDirectory } from "../cache"
 import { PROJECT_ROOT } from "../constants"
@@ -9,8 +10,7 @@ import { createTypeScriptConfig, createTypeScriptConfigSync } from "../typescrip
 
 import { IGNORE_PATTERNS_DEFAULT } from "./constants"
 
-
-export const getIgnorePatterns = () => IGNORE_PATTERNS_DEFAULT
+const getIgnorePatterns = () => IGNORE_PATTERNS_DEFAULT.map(pattern => `**/${pattern}`)
 
 const getGlobalDirectorySync = () => {
   const { stdout } = execa.sync("yarn", [ "global", "dir" ])
@@ -36,26 +36,24 @@ const getGlobalNodeModulesDirectory = async () => {
 
 const getGlobalParserPath = async parserName => {
   const globalNodeModulesDirectory = await getGlobalNodeModulesDirectory()
-  const parserPath = `${globalNodeModulesDirectory}/${parserName}`
-  try {
-    return require.resolve(parserPath)
+  const parserDirectory = `${globalNodeModulesDirectory}/${parserName}`
+  const exists = await pathExists(parserDirectory)
+  if (exists) {
+    return parserDirectory
   }
-  catch (error) {
-    console.error(`Unable to locate global parser named ${parserName}`)
-    return parserName
-  }
+  console.error(`Failed to find global parser directory. (${parserDirectory})`)
+  return parserName
 }
 
 const getGlobalParserPathSync = parserName => {
   const globalNodeModulesDirectory = getGlobalNodeModulesDirectorySync()
-  const parserPath = `${globalNodeModulesDirectory}/${parserName}`
-  try {
-    return require.resolve(parserPath)
+  const parserDirectory = `${globalNodeModulesDirectory}/${parserName}`
+  const exists = pathExistsSync(parserDirectory)
+  if (exists) {
+    return parserDirectory
   }
-  catch (error) {
-    console.error(`Unable to locate global parser named ${parserName}`)
-    return parserName
-  }
+  console.error(`Failed to find global parser directory. (${parserDirectory})`)
+  return parserName
 }
 
 const createOptions = (eslintConfig, options) => ({
@@ -87,6 +85,7 @@ function createCLIOptionsSync(eslintConfig, options) {
     newOptions.parserOptions = {
       ...newOptions.parserOptions,
       project: createTypeScriptConfigSync(),
+      tsconfigRootDir: PROJECT_ROOT,
     }
   }
   return newOptions
@@ -102,6 +101,7 @@ async function createCLIOptions(eslintConfig, options) {
     newOptions.parserOptions = {
       ...newOptions.parserOptions,
       project: await createTypeScriptConfig(),
+      tsconfigRootDir: PROJECT_ROOT,
     }
   }
   return newOptions
