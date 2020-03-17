@@ -1,6 +1,6 @@
 import delve from "dlv"
-import isObject from "lodash/isObject"
 import isArray from "lodash/isArray"
+import isObject from "lodash/isObject"
 import isUndefined from "lodash/isUndefined"
 
 import { RULE_DISABLED, RULE_NOT_CONFIGURED } from "../constants"
@@ -16,20 +16,20 @@ export function hasRuleValue(ruleValue) {
   return true
 }
 
-function getRealRuleValue(config, ruleName, objPath) {
-  const rules = config.rules
+function getRealRuleValue(config, ruleName, objectPath) {
+  const { rules } = config
   const rule = rules[ruleName]
 
   if (isArray(rule)) {
-    const [lintLevel, value] = rule
+    const [ lintLevel, value ] = rule
 
     if (lintLevel === "off" || lintLevel === 0) {
       return RULE_DISABLED
     }
 
     if (isObject(value)) {
-      if (objPath) {
-        return delve(value, objPath, RULE_NOT_CONFIGURED)
+      if (objectPath) {
+        return delve(value, objectPath, RULE_NOT_CONFIGURED)
       }
       return undefined
     }
@@ -52,6 +52,6 @@ export function getRuleValue(eslintConfig, ruleNames = []) {
   return ruleValue
 }
 
-export function isAlways(val) {
-  return val.indexOf("always") === 0
+export function isAlways(value) {
+  return value.indexOf("always") === 0
 }

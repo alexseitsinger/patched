@@ -1,10 +1,11 @@
-import isUndefined from "lodash/isUndefined"
-import isString from "lodash/isString"
 import isObject from "lodash/isObject"
+import isString from "lodash/isString"
+import isUndefined from "lodash/isUndefined"
 
-import { isAlways } from "./rules"
-import { DEFAULT_PRETTIER_CONFIG, RULE_NOT_CONFIGURED } from "../constants"
-import { getRuleValue, hasRuleValue } from "./rules"
+import { RULE_NOT_CONFIGURED } from "../constants"
+
+import { DEFAULT_PRETTIER_CONFIG } from "./constants"
+import { getRuleValue, hasRuleValue, isAlways } from "./rules"
 
 function makePrettierOption(prettierRuleName, prettierRuleValue) {
   if (hasRuleValue(prettierRuleValue)) {
@@ -27,7 +28,7 @@ function getPrintWidth(eslintConfig) {
 
 //
 function getTabWidth(eslintConfig) {
-  const prettierValue = getRuleValue(eslintConfig, ["indent", "@typescript-eslint/indent"])
+  const prettierValue = getRuleValue(eslintConfig, [ "indent", "@typescript-eslint/indent" ])
   if (hasRuleValue(prettierValue) && prettierValue === "tab") {
     return getPrintWidth(eslintConfig)
   }
@@ -38,7 +39,7 @@ function getTabWidth(eslintConfig) {
 function getSemi(eslintConfig) {
   let prettierValue
 
-  const ruleValue = getRuleValue(eslintConfig, ["semi", "babel/semi", "@typescript-eslint/semi"])
+  const ruleValue = getRuleValue(eslintConfig, [ "semi", "babel/semi", "@typescript-eslint/semi" ])
 
   switch (ruleValue) {
     case "never": {
@@ -61,7 +62,7 @@ function getSemi(eslintConfig) {
 function getUseTabs(eslintConfig) {
   let prettierValue = RULE_NOT_CONFIGURED
 
-  const ruleValue = getRuleValue(eslintConfig, ["indent", "@typescript-eslint/indent"])
+  const ruleValue = getRuleValue(eslintConfig, [ "indent", "@typescript-eslint/indent" ])
   if (ruleValue === "tab") {
     prettierValue = true
   }
@@ -73,7 +74,7 @@ function getUseTabs(eslintConfig) {
 function getSingleQuote(eslintConfig) {
   let prettierValue
 
-  const ruleValue = getRuleValue(eslintConfig, ["quotes", "@typescript-eslint/quotes"])
+  const ruleValue = getRuleValue(eslintConfig, [ "quotes", "@typescript-eslint/quotes" ])
   switch (ruleValue) {
     case "single": {
       prettierValue = true
@@ -97,11 +98,11 @@ function getSingleQuote(eslintConfig) {
 
 function getValueFromTrailingCommaConfig({
   arrays = "",
-  objects = "",
   functions = "",
+  objects = "",
 }) {
   const fns = isAlways(functions)
-  const es5 = [arrays, objects].some(isAlways)
+  const es5 = [ arrays, objects ].some(isAlways)
   if (fns) {
     return "all"
   }
@@ -146,7 +147,7 @@ function getJsxBracketSameLine(eslintConfig) {
 
   switch (ruleValue) {
     case "after-props": {
-      prettierValue = true;
+      prettierValue = true
       break
     }
     case "tag-aligned":
@@ -186,7 +187,7 @@ function getBracketSpacing(eslintConfig) {
 }
 
 function getParser(eslintConfig) {
-  let prettierValue;
+  let prettierValue
   const currentValue = eslintConfig.parser ? eslintConfig.parser : undefined
   // need to add the remaining parsers here...
   switch (currentValue) {

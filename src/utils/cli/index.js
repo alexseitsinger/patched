@@ -1,12 +1,16 @@
-import fs from "fs"
 import path from "path"
 
 import execa from "execa"
-import pkgDir from "pkg-dir"
 
-import { getESLintConfig, getESLintConfigSync } from "./eslint"
+import { CACHE_DIRECTORY_NAME, cacheDirectory } from "../cache"
+import { PROJECT_ROOT } from "../constants"
+import { getESLintConfig, getESLintConfigSync } from "../eslint"
+import { createTypeScriptConfig, createTypeScriptConfigSync } from "../typescript"
 
-const getProjectRoot = () => path.resolve(pkgDir.sync() || process.cwd())
+import { IGNORE_PATTERNS_DEFAULT } from "./constants"
+
+
+export const getIgnorePatterns = () => IGNORE_PATTERNS_DEFAULT
 
 const getGlobalDirectorySync = () => {
   const { stdout } = execa.sync("yarn", [ "global", "dir" ])
@@ -33,77 +37,71 @@ const getGlobalNodeModulesDirectory = async () => {
 const getGlobalParserPath = async parserName => {
   const globalNodeModulesDirectory = await getGlobalNodeModulesDirectory()
   const parserPath = `${globalNodeModulesDirectory}/${parserName}`
-  if (fs.existsSync(parserPath)) {
-    return parserPath
+  try {
+    return require.resolve(parserPath)
   }
-  console.error(`Unable to local global parser named ${parserName}`)
-  return parserName
+  catch (error) {
+    console.error(`Unable to locate global parser named ${parserName}`)
+    return parserName
+  }
 }
 
 const getGlobalParserPathSync = parserName => {
   const globalNodeModulesDirectory = getGlobalNodeModulesDirectorySync()
   const parserPath = `${globalNodeModulesDirectory}/${parserName}`
-  if (fs.existsSync(parserPath)) {
-    return parserPath
+  try {
+    return require.resolve(parserPath)
   }
-  console.error(`Unable to local global parser named ${parserName}`)
-  return parserName
+  catch (error) {
+    console.error(`Unable to locate global parser named ${parserName}`)
+    return parserName
+  }
 }
 
 const createOptions = (eslintConfig, options) => ({
   ...options,
   useEslintrc: false,
+  cache: true,
+  cacheLocation: path.join(cacheDirectory, `${CACHE_DIRECTORY_NAME}.json`),
   baseConfig: {
     settings: eslintConfig.settings,
   },
-  parser: getGlobalParserPathSync(eslintConfig.parser || "espree"),
+  parser: eslintConfig.parser
+    ? getGlobalParserPathSync(eslintConfig.parser)
+    : "espree",
   parserOptions: eslintConfig.parserOptions,
   envs: Object.keys(eslintConfig.env),
   rules: eslintConfig.rules,
   plugins: eslintConfig.plugins,
+  ignorePatterns: getIgnorePatterns(),
+  cwd: PROJECT_ROOT,
 })
 
 function createCLIOptionsSync(eslintConfig, options) {
-  const projectRoot = getProjectRoot()
   const globalNodeModules = getGlobalNodeModulesDirectorySync()
   const newOptions = {
     ...createOptions(eslintConfig, options),
-    cwd: projectRoot,
     resolvePluginsRelativeTo: globalNodeModules,
   }
   if (newOptions.parser.includes("@typescript-eslint/parser")) {
     newOptions.parserOptions = {
       ...newOptions.parserOptions,
-      tsconfigRootDir: projectRoot,
-      project: [
-        `${projectRoot}/tsconfig.json`,
-        `${projectRoot}/tsconfig.jest.json`,
-        `${projectRoot}/tsconfig.dev.json`,
-      ],
-      createDefaultProgram: true,
+      project: createTypeScriptConfigSync(),
     }
   }
   return newOptions
 }
 
 async function createCLIOptions(eslintConfig, options) {
-  const projectRoot = getProjectRoot()
   const globalNodeModules = await getGlobalNodeModulesDirectory()
   const newOptions = {
     ...createOptions(eslintConfig, options),
-    cwd: projectRoot,
     resolvePluginsRelativeTo: globalNodeModules,
   }
   if (newOptions.parser.includes("@typescript-eslint/parser")) {
     newOptions.parserOptions = {
       ...newOptions.parserOptions,
-      project: [
-        `${projectRoot}/tsconfig.json`,
-        `${projectRoot}/tsconfig.jest.json`,
-        `${projectRoot}/tsconfig.dev.json`,
-      ],
-      tsconfigRootDir: projectRoot,
-      createDefaultProgram: true,
+      project: await createTypeScriptConfig(),
     }
   }
   return newOptions
@@ -120,4 +118,3 @@ export function getCLIOptionsSync(files, providedOptions) {
   const cliOptions = createCLIOptionsSync(eslintConfig, providedOptions)
   return cliOptions
 }
-

@@ -6,7 +6,7 @@ export const mergeReports = reports => {
   let mergedWarningCount = 0
 
   reports.forEach(({ errorCount, results, warningCount }) => {
-    mergedResults = [...mergedResults, ...results]
+    mergedResults = [ ...mergedResults, ...results ]
     mergedErrorCount += errorCount
     mergedWarningCount += warningCount
   })

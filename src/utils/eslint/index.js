@@ -1,21 +1,16 @@
 import { createConfig, getPlugins } from "patched-rulesets"
 
-import { EXCLUDED_GROUPS } from "../constants"
-import {
-  isJest,
-  isJestSync,
-  isJsonFiles,
-  isPackageJsonFile,
-  isReact,
-  isReactSync,
-  isRedux,
-  isReduxSync,
-  isTypeScript,
-  isTypeScriptSync,
-  isWebpack,
-  isWebpackSync,
-} from "../is"
+import { isJest, isJestSync } from "../jest/is"
+import { isJsonFiles, isPackageJsonFile } from "../package/is"
+import { isReact, isReactSync } from "../react/is"
+import { isRedux, isReduxSync } from "../redux/is"
+import { isTypeScript, isTypeScriptSync } from "../typescript/is"
+import { isWebpack, isWebpackSync } from "../webpack/is"
+import { getPatchedConfig, getPatchedConfigSync } from ".."
 
+import { EXCLUDED_GROUPS } from "./constants"
+
+export * from "./constants"
 
 export function determineFeaturesSync(inputs) {
   return {
@@ -86,9 +81,7 @@ export async function determinePluginGroups(inputFiles) {
 }
 
 function shouldUseEslint(pluginGroups) {
-  const isExcluded = pluginGroups
-    .map(n => EXCLUDED_GROUPS.includes(n))
-    .includes(true)
+  const isExcluded = pluginGroups.map(n => EXCLUDED_GROUPS.includes(n)).includes(true)
   if (isExcluded) {
     return false
   }
@@ -99,12 +92,14 @@ export function getESLintConfigSync(inputs) {
   const pluginGroups = determinePluginGroupsSync(inputs)
   const useEslint = shouldUseEslint(pluginGroups)
   const pluginNames = getPlugins(pluginGroups)
-  return createConfig({ pluginNames, useEslint })
+  const patchedConfig = getPatchedConfigSync()
+  return createConfig({ pluginNames, useEslint, patchedConfig })
 }
 
 export async function getESLintConfig(inputFiles) {
   const pluginGroups = await determinePluginGroups(inputFiles)
   const useEslint = shouldUseEslint(pluginGroups)
   const pluginNames = getPlugins(pluginGroups)
-  return createConfig({ pluginNames, useEslint })
+  const patchedConfig = await getPatchedConfig()
+  return createConfig({ pluginNames, useEslint, patchedConfig })
 }

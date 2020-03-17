@@ -6,6 +6,8 @@ import readPkgUp from "read-pkg-up"
 
 import { DEPENDENCY_KEYS } from "./constants"
 
+export * from "./constants"
+
 export function readProjectPackageJson() {
   const filePath = path.join(pkgDir.sync(), "package.json")
   let raw = "{}"
