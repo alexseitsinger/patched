@@ -11,28 +11,38 @@ const toAbsoluteGlob = require("to-absolute-glob")
 const { isTypeScriptFile } = require("./is")
 const { outputJson, outputJsonSync, readJson, readJsonSync } = require("fs-extra")
 
+const {
+  IGNORED_DIRECTORY_NAMES,
+  NODE_VERSION_DEFAULT,
+  TARGET_EXTENSIONS,
+  TSCONFIG_NAME,
+} = require("./constants")
 const { cacheDirectory } = require("../cache")
-const { IGNORED_DIRECTORY_NAMES, NODE_VERSION_DEFAULT, TARGET_EXTENSIONS, TSCONFIG_NAME } = require("./constants")
+const { PROJECT_ROOT } = require("../constants")
 
 export * from "./constants"
 
 const getProjectFilesSync = () => {
-  const projectRoot = pkgDir.sync()
   const directories = IGNORED_DIRECTORY_NAMES.join(",")
   const extensions = TARGET_EXTENSIONS.join(",")
-  const fileGlob = toAbsoluteGlob(`${projectRoot}/**/*.${extensions}`)
-  const ignoreGlob = toAbsoluteGlob(`!${projectRoot}/${directories}/**/*`)
-  const files = globby.sync([ fileGlob, ignoreGlob ], { gitignore: true })
+  const fileGlob = toAbsoluteGlob(`**/*.{${extensions}}`, { cwd: PROJECT_ROOT })
+  const ignoreGlob = toAbsoluteGlob(`!**/{${directories}}`, { cwd: PROJECT_ROOT })
+  const files = globby.sync([ fileGlob, ignoreGlob ], {
+    gitignore: true,
+    cwd: PROJECT_ROOT,
+  })
   return files
 }
 
 const getProjectFiles = async () => {
-  const projectRoot = await pkgDir()
   const directories = IGNORED_DIRECTORY_NAMES.join(",")
   const extensions = TARGET_EXTENSIONS.join(",")
-  const fileGlob = toAbsoluteGlob(`${projectRoot}/**/*.${extensions}`)
-  const ignoreGlob = toAbsoluteGlob(`!${projectRoot}/${directories}/**/*`)
-  const files = await globby([ fileGlob, ignoreGlob ], { gitignore: true })
+  const fileGlob = toAbsoluteGlob(`**/*.{${extensions}}`, { cwd: PROJECT_ROOT })
+  const ignoreGlob = toAbsoluteGlob(`!**/{${directories}}`, { cwd: PROJECT_ROOT })
+  const files = await globby([ fileGlob, ignoreGlob ], {
+    gitignore: true,
+    cwd: PROJECT_ROOT,
+  })
   return files
 }
 
@@ -40,7 +50,9 @@ const getHashedConfigName = ({ files = [], nodeVersion = NODE_VERSION_DEFAULT })
   const prefix = `${packageJSON.version}_${nodeVersion}`
   const suffix = stringify({ files: files.sort() })
   const full = `${prefix}_${suffix}`
-  const hash = murmur(full).result().toString(36)
+  const hash = murmur(full)
+    .result()
+    .toString(36)
   const name = `tsconfig.${hash}.json`
   return name
 }
@@ -59,27 +71,55 @@ const getProjectTypeScriptConfigSync = () => {
   return { tsConfig, tsConfigPath }
 }
 
+const updatePaths = tsConfig => {
+  try {
+    const { paths } = tsConfig.compilerOptions
+    const pathKeys = Object.keys(paths)
+    const newPaths = {}
+    pathKeys.forEach(pathKey => {
+      newPaths[pathKey] = paths[pathKey].map(p => path.relative(PROJECT_ROOT, p))
+    })
+
+    return newPaths
+  }
+  catch (error) {
+    return {}
+  }
+}
 export const createTypeScriptConfigSync = nodeVersion => {
   const files = getProjectFilesSync()
   const { tsConfig } = getProjectTypeScriptConfigSync()
   const configName = getHashedConfigName({ nodeVersion, files })
   const configPath = path.join(cacheDirectory, configName)
-  outputJsonSync(configPath, {
+  const newConfig = {
     ...tsConfig,
+    compilerOptions: {
+      ...tsConfig.compilerOptions,
+      baseUrl: PROJECT_ROOT,
+      paths: updatePaths(tsConfig),
+    },
     files: files.filter(isTypeScriptFile),
-  })
+  }
+  outputJsonSync(configPath, newConfig)
   return configPath
 }
+
 
 export const createTypeScriptConfig = async nodeVersion => {
   const files = await getProjectFiles()
   const { tsConfig } = await getProjectTypeScriptConfig()
   const configName = getHashedConfigName({ nodeVersion, files })
   const configPath = path.join(cacheDirectory, configName)
-  await outputJson(configPath, {
+  const newConfig = {
     ...tsConfig,
+    compilerOptions: {
+      ...tsConfig.compilerOptions,
+      paths: updatePaths(tsConfig),
+      baseUrl: PROJECT_ROOT,
+    },
     files: files.filter(isTypeScriptFile),
-  })
+  }
+
+  await outputJson(configPath, newConfig)
   return configPath
 }
-

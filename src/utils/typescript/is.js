@@ -18,13 +18,13 @@ export async function hasTypeScriptFiles() {
 
 export function isTypeScriptFile(file) {
   const target = file
-  if (isArray(target)) {
-    return target.map(fn => isTypeScriptFile(fn)).includes(true)
-  }
-  if (isString(file)) {
-    const bits = file.split(".")
+  if (isString(target)) {
+    const bits = target.split(".")
     const extension = bits.pop()
     return TYPESCRIPT_EXTENSIONS.includes(extension)
+  }
+  if (isArray(target)) {
+    return target.map(fn => isTypeScriptFile(fn)).includes(true)
   }
   return false
 }
