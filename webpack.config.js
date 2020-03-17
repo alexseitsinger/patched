@@ -40,6 +40,7 @@ module.exports = {
   externals: [
     new NodeExternals({
       whitelist: [
+        "path-exists",
         "execa",
         "patched-rulesets",
         "fast-glob",
