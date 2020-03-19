@@ -3,4 +3,7 @@
   "quotes": "double",
   "braceStyle": "stroustrup",
   "maxLength": 88,
+  "emitDeclarations": false,
+  "webpackFileName": "webpack.config.js",
+  "jestFileName": "jest.config.js"
 }
