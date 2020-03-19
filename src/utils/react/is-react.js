@@ -1,16 +1,6 @@
-import isString from "lodash/isString"
+import { hasProjectDependency, hasProjectDependencySync } from "../dependencies/has-project-dependency"
 
-import { hasProjectDependency, hasProjectDependencySync } from "../dependencies"
-
-import { REACT_SOURCES } from "./constants"
-
-export function isReactSource(code) {
-  if (!isString(code)) {
-    return false
-  }
-  return REACT_SOURCES.map(k => code.includes(k)).includes(true)
-}
-
+import { isReactSource } from "./is-react-source"
 
 export const isReactSync = inputs => {
   const hasDependency = hasProjectDependencySync("react")

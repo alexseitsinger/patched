@@ -1,2 +1,2 @@
-export const EXCLUDED_GROUPS = [ "packageJson", "json" ]
+export const EXCLUDED_GROUPS = [ "packageJSON", "json" ]
 

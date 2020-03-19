@@ -1,4 +1,4 @@
-import { hasProjectDependency, hasProjectDependencySync } from "../dependencies"
+import { hasProjectDependency, hasProjectDependencySync } from "../dependencies/has-project-dependency"
 
 export const isWebpack = async inputs => {
   const hasDependency = await hasProjectDependency("webpack")
