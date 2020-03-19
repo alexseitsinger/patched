@@ -1,30 +1,31 @@
 import path from "path"
-
 import { CLIEngine } from "./api"
-import { getCLIOptions } from "./utils/cli"
-import { processReport } from "./utils/linter"
+import { getCLIOptions, getCLIOptionsSync } from "./utils/cli/get-cli-options"
 
-export const lintText = async (string, providedOptions) => {
-  const cliOptions = await getCLIOptions(string, providedOptions)
-  const linter = new CLIEngine(cliOptions)
-  const fileName = cliOptions.filename
-    ? path.relative(cliOptions.cwd, cliOptions.filename)
+
+const processReport = (report, options) => ({
+  ...report,
+  results: options.quiet ? CLIEngine.getErrorResults(report.results) : report.results,
+})
+
+export const lintText = (string, providedOptions) => {
+  const engine = new CLIEngine(providedOptions)
+  const fileName = providedOptions.filename
+    ? path.relative(providedOptions.cwd, providedOptions.filename)
     : ""
-  const report = linter.executeOnText(string, fileName)
-  return processReport(report, cliOptions)
+  const report = engine.executeOnText(string, fileName)
+  return processReport(report, providedOptions)
 }
 
-export const lintFiles = async (filePaths, providedOptions) => {
-  const cliOptions = await getCLIOptions(filePaths, providedOptions)
-  const linter = new CLIEngine(cliOptions)
-  // Const filteredFilePaths = filePaths.filter(fp => !linter.isPathIgnored(fp))
-  const report = linter.executeOnFiles(filePaths, providedOptions)
-  return processReport(report, cliOptions)
+export const lintFiles = (filePaths, providedOptions) => {
+  const engine = new CLIEngine(providedOptions)
+  // Const filteredFilePaths = filePaths.filter(fp => !engine.isPathIgnored(fp))
+  const report = engine.executeOnFiles(filePaths, providedOptions)
+  return processReport(report, providedOptions)
 }
 
-export const getConfigForFile = async (filePath, providedOptions) => {
-  const cliOptions = await getCLIOptions(filePath, providedOptions)
-  const engine = new CLIEngine(cliOptions)
+export const getConfigForFile = (filePath, providedOptions) => {
+  const engine = new CLIEngine(providedOptions)
   return engine.getConfigForFile(filePath)
 }
 
