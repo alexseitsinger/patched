@@ -1,6 +1,5 @@
 import { getESLintConfig, getESLintConfigSync } from "../eslint/get-eslint-config"
 import { createCLIOptions, createCLIOptionsSync } from "./create-cli-options"
-import { pathExists } from "fs-extra"
 import { gotoProjectRoot } from "../goto-project-root"
 
 export const getCLIOptions = async (files, providedOptions) => {

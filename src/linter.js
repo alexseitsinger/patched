@@ -1,7 +1,5 @@
 import path from "path"
 import { CLIEngine } from "./api"
-import { getCLIOptions, getCLIOptionsSync } from "./utils/cli/get-cli-options"
-
 
 const processReport = (report, options) => ({
   ...report,

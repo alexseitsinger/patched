@@ -19,14 +19,13 @@ export const getPatchedConfig = () => {
 
     try {
       const filePath = path.join(getProjectRoot(), name)
-      console.log(filePath)
       config = require(filePath)
     }
     catch (error) {}
   })
 
   if (isUndefined(config)) {
-    console.error("Failed to load any patched config")
+    //console.error("Failed to load any patched config")
     return PATCHEDRC_DEFAULT
   }
   return config
