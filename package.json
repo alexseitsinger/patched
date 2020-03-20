@@ -1,6 +1,6 @@
 {
   "name": "patched",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Patched is a comprehensive and opinionated linter and formatter",
   "author": {
     "email": "software@alexseitsinger.com",
