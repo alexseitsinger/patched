@@ -73,7 +73,7 @@
     "lodash": "^4.17.15",
     "meow": "^6.1.0",
     "minimist": "^1.2.2",
-    "patched-rulesets": "^0.11.0",
+    "patched-rulesets": "^0.11.2",
     "path-exists": "^4.0.0",
     "pkg-dir": "^4.2.0",
     "prettier": "^1.19.1",
